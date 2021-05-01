@@ -1,0 +1,162 @@
+doctype html
+head
+  meta(charset='UTF-8')
+  meta(http-equiv='X-UA-Compatible' content='IE=edge')
+  meta(name='viewport' content='width=device-width, initial-scale=1.0')
+  link(rel="stylesheet", href="../public/css/style.css")
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Chivo:wght@300&family=Eczar&display=swap" rel="stylesheet"> 
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;700&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;500&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;500&display=swap" rel="stylesheet">
+  title Police-X
+
+body
+  header#nav-area
+      div#navbar
+          div#logo
+            img(src="../public/img/logo.png", alt="", srcset="")
+            h1 #[span P]olice - X
+          ul
+              li #[a(href="http://") Home]
+              li #[a(href="http://") About Us]
+              li #[a(href="http://") News]
+              li #[a(href="http://") Services]
+              li #[a(href="http://") Login]
+      
+  div#content
+
+    div.scroll-down
+        img(src="../public/img/scroll-down.jpg", alt="", srcset="")
+
+    div.banner-area
+      div.slider
+        div.slides
+          input(type="radio" name="radio-btn" id="radio1")
+          input(type="radio" name="radio-btn" id="radio2")
+          input(type="radio" name="radio-btn" id="radio3")
+          input(type="radio" name="radio-btn" id="radio4")
+          div.slide.first
+            img(src="../public/img/img1.jpg", alt="", srcset="")
+          div.slide
+            img(src="../public/img/img2.jpg", alt="", srcset="")
+          div.slide
+            img(src="../public/img/img3.jpg", alt="", srcset="")
+          div.slide
+            img(src="../public/img/img4.jpg", alt="", srcset="")
+          
+          div.navigation-auto
+            div.auto-btn1
+            div.auto-btn2
+            div.auto-btn3
+            div.auto-btn4
+
+          div.navigation-manual
+            label(for="radio1" class="manual-btn") 
+            label(for="radio2" class="manual-btn") 
+            label(for="radio3" class="manual-btn") 
+            label(for="radio4" class="manual-btn") 
+      
+
+
+    div#news-section
+      h2.heads Latest news
+      div.line
+
+      div.news
+        div.news1 
+          img(src="../public/img/news.jpg", alt="", srcset="")
+          div.text
+            h3 Lane Closure on MacDill Avenue on March 5, 2016
+            p Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus corrupti perferendis dolore facere nulla molestias harum quibusdam nihil tempore minus culpa itaque, beatae quae similique qui ad recusandae ut consequuntur. Sequi, laborum. Lorem ipsum, dolor sit amet consectetur adipisicing elit. Libero quia mollitia sequi repellendus molestias cumque commodi iusto laudantium officiis excepturi eligendi nostrum, sint laborum rerum minus ipsum ex voluptatem tempore itaque magnam! Sed ut perspiciatis, unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam eaque ipsa, quae ab illo...
+          
+        div.news2
+          div.text
+            h3 Lane Closure on MacDill Avenue on March 5, 2016
+            p Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate omnis aut eligendi at repellat sed similique nostrum distinctio asperiores laborum non dicta libero quibusdam autem debitis quas neque ipsam, quod accusamus repellendus doloribus. Libero maxime non at iste, repudiandae quam repellat ab adipisci dignissimos corporis illo nostrum consequatur vel optio aut suscipit impedit qui tempora nobis nulla est cupiditate id. Nobis iste architecto fugit! Sed ut perspiciatis, unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam eaque ipsa, quae ab illo...
+          img(src="../public/img/news.jpg", alt="", srcset="")
+
+    
+
+    div.services-section
+      h2.heads featured services
+      div.line
+
+      div.services
+        div.box
+          img(src="../public/img/FIR.jpg", alt="", srcset="")
+          div.stext
+            h3 register a complaint
+            p Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil inventore accusamus vero doloremque explicabo libero?
+        div.box  
+          img(src="../public/img/analysis.jpg", alt="", srcset="")
+          div.stext
+            h3 Report Analysis
+            p Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil inventore accusamus vero doloremque explicabo libero?
+
+      div.services
+        div.box
+          img(src="../public/img/cyber-crime.jpg", alt="", srcset="")
+          div.stext
+            h3 Cyber crime
+            p Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil inventore accusamus vero doloremque explicabo libero?
+        div.box  
+          img(src="../public/img/licence.jpg", alt="", srcset="")
+          div.stext
+            h3 Driving Licence
+            p Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil inventore accusamus vero doloremque explicabo libero?
+
+
+    div.emergency-section 
+      div.emergency
+        div.word
+          h1 Emergency ?
+          h1 Call 112 ...
+          a(href= "tel:112")
+            button Call
+      
+      div.pcar
+        img(src="../public/img/pcar.jpg", alt="", srcset="")
+
+
+
+    div.location-section
+      div.location
+        h2 GET IN TOUCH WITH US
+        div.line.cc
+        h3 GHATKOPAR POLICE STATION
+        p  Lal Bahadur Shastri Rd, Chirag Nagar, 
+        p Ghatkopar West, Mumbai, 
+        p Maharashtra 400086.
+
+        h3 CONTACT US
+        div.num 
+          img(src="../public/img/call-img.png", alt="", srcset="")
+          div #[a(href= "tel: 9999222200") 9999-2222-00]
+        div.num 
+          img(src="../public/img/call-img.png", alt="", srcset="")
+          div #[a(href = "tel: 112") 112]
+
+      div.map
+        .mapouter
+          .gmap_canvas
+            iframe#gmap_canvas(width='600' height='400' src='https://maps.google.com/maps?q=Ghatkopar%20Police%20Station&t=&z=17&ie=UTF8&iwloc=&output=embed' frameborder='0' scrolling='no' marginheight='0' marginwidth='0')
+            a(href='https://fmovies2.org')
+            br
+            style.
+              .mapouter{position:relative;text-align:right;height:500px;width:600px;}
+            a(href='https://www.embedgooglemap.net')
+            style.
+              .gmap_canvas {overflow:hidden;background:none!important;height:500px;width:600px;}
+
+
+    div.footer  
+      p &copy Police-X 2021
+
+
+
+
+  script(src="../public/scripts/home.js" type="text/javascript")
