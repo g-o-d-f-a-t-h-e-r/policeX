@@ -1,12 +1,13 @@
 *{
     margin: 0;
     padding: 0;
+    scroll-behavior: smooth;
 }
 
 body{
     height: 100vh;
     color: black;
-
+    
 }
 
 #nav-area{
@@ -29,6 +30,7 @@ body{
     padding: 20px;
     user-select: none;
     font-family: 'Eczar', serif;
+    
     
 }
 
@@ -226,6 +228,36 @@ body{
     padding: 0 50px 0 0;
 }
 
+.text{
+    height: 250px;
+    overflow:auto;
+    
+}
+
+/* width */
+::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+    border-radius: 10px;
+    box-shadow: inset 0 0 2px rgb(224, 224, 224);
+  }
+   
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #40D3DC; 
+    border-radius: 10px;
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #36c1c9; 
+    
+  }
+
 .text h3{
     font-size: 2.2rem;
     line-height: 40px;
@@ -233,9 +265,24 @@ body{
     color: rgb(17, 17, 102);
 }
 
-.text p{
+.text p, .text ul, .text li{
     font-family: 'Chivo', sans-serif;
     font-size: 1.1rem;
+}
+
+.text a{
+    text-decoration: none;
+    font-size: 1.1rem;
+    font-family: 'Eczar', serif;
+    color: rgb(172, 14, 14);
+    text-decoration: underline;
+}
+
+.text a:hover{
+    color: red;
+    transition-duration: 0.3s;
+    
+
 }
 
 
