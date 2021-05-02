@@ -11,6 +11,7 @@ xhr.onload = function(){
         let json = JSON.parse(this.responseText);
         console.log(json);
         let articles = json.articles;
+        
         console.log(articles[0].title);
 
         let num2 = 0;
