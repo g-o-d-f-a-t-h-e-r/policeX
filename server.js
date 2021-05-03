@@ -9,11 +9,11 @@ const port = process.env.PORT || 80;
 //Express Setup ---------------------------------------------------------------------------------------------
 const app = express();
 
-app.use(cors());
+// app.use(cors());
 
-app.get('/products/:id', function (req, res, next) {
-    res.json({msg: 'This is CORS-enabled for all origins!'})
-});
+// app.get('/products/:id', function (req, res, next) {
+//     res.json({msg: 'This is CORS-enabled for all origins!'})
+// });
 
 
 app.use('/public', express.static('public'));
