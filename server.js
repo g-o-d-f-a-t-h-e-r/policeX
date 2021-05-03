@@ -7,10 +7,11 @@ const port = process.env.PORT || 80;
 //Express Setup ---------------------------------------------------------------------------------------------
 const app = express();
 
+// Add headers
 app.use(function (req, res, next) {
 
     // Website you wish to allow to connect
-    res.setHeader('Access-Control-Allow-Origin', 'http://policex.herokuapp.com');
+    res.setHeader('Access-Control-Allow-Origin', 'policex.herokuapp.com');
 
     // Request methods you wish to allow
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
@@ -25,7 +26,6 @@ app.use(function (req, res, next) {
     // Pass to next layer of middleware
     next();
 });
-
 
 app.use('/public', express.static('public'));
 
