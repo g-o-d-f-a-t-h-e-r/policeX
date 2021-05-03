@@ -2,17 +2,16 @@
 let news1 = document.querySelector('.news1');
 let news2 = document.querySelector('.news2');
 
-// Create a GET request
-const xhr = new XMLHttpRequest();
-xhr.open('GET', 'http://newsapi.org/v2/top-headlines?country=in&apiKey=e56e87add54441be86d6d05eb30b5134', true);
 
-xhr.onload = function(){
-    if(this.status === 200){
-        let json = JSON.parse(this.responseText);
-        console.log(json);
-        let articles = json.articles;
-        
-        console.log(articles[0].title);
+fetch('http://newsapi.org/v2/top-headlines?country=in&apiKey=e56e87add54441be86d6d05eb30b5134', {
+    method: 'GET'
+})
+    .then(res => {
+        return res.json()
+    })
+    .then(Articles => {
+        console.log(Articles.articles)
+        let articles = Articles.articles
 
         let num2 = 0;
         let num1 = Math.floor(Math.random() * (articles.length - 1)) + 1;
@@ -23,6 +22,7 @@ xhr.onload = function(){
             num2 = num1 - 1;
         }
 
+        
         let News1 = `<img src="${articles[num1].urlToImage}" alt="" srcset="" />
         <div class="text">
             <h3>${articles[num1].title}</h3>
@@ -40,12 +40,5 @@ xhr.onload = function(){
 
         news1.innerHTML = News1;
         news2.innerHTML = News2;
-
-
-    }
-    else{
-        console.log('Some error occured');
-    }
-}
-
-xhr.send();
+    })
+    .catch(error => console.log('ERROR'))
