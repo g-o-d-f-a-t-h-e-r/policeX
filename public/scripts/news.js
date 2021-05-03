@@ -2,13 +2,10 @@
 let news1 = document.querySelector('.news1');
 let news2 = document.querySelector('.news2');
 
-var myHeaders = new Headers({
-    'Content-Type': 'text/plain',
-    'X-Custom-Header': 'hello world'
-  });
+
 
 fetch('http://newsapi.org/v2/top-headlines?country=in&apiKey=e56e87add54441be86d6d05eb30b5134', {
-    headers: 'myHeaders'
+        mode: 'cors'
 })
     .then(res => {
         return res.json()
