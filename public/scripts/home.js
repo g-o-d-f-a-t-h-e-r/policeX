@@ -21,6 +21,6 @@ setInterval(function(){
     if(counter > 4){
         counter = 1;
     }
-},8000);
+},10000);
 
 console.log("HelLo chetan")

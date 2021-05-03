@@ -13,7 +13,7 @@ app.use(cors());
 
 app.get('/products/:id', function (req, res, next) {
     res.json({msg: 'This is CORS-enabled for all origins!'})
-  });
+});
 
 
 app.use('/public', express.static('public'));
