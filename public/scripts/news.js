@@ -3,15 +3,15 @@ let news1 = document.querySelector('.news1');
 let news2 = document.querySelector('.news2');
 
 
-fetch('http://newsapi.org/v2/top-headlines?country=in&apiKey=e56e87add54441be86d6d05eb30b5134', {
+fetch('http://api.mediastack.com/v1/news?access_key=9ae0ecffcb224c929bbc12007ebec58a&%20countries=in&%20keywords=crime&languages=en&limit=100', {
     
 })
     .then(res => {
         return res.json()
     })
     .then(Articles => {
-        console.log(Articles.articles)
-        let articles = Articles.articles
+        console.log(Articles.data)
+        let articles = Articles.data
 
         let num2 = 0;
         let num1 = Math.floor(Math.random() * (articles.length - 1)) + 1;
@@ -22,21 +22,39 @@ fetch('http://newsapi.org/v2/top-headlines?country=in&apiKey=e56e87add54441be86d
             num2 = num1 - 1;
         }
 
+        let image1;
+        let image2; 
+
+        if(articles[num1].image == null){
+            image1 = `../public/img/NEWS.png`;
         
-        let News1 = `<img src="${articles[num1].urlToImage}" alt="" srcset="" />
+        }
+        else{
+            image1 = articles[num1].image
+        }
+
+        if(articles[num2].image == null){
+            image2 = `../public/img/NEWS.png`;
+        
+        }
+        else{
+            image2 = articles[num2].image
+        }
+
+        let News1 = `<img src="${image1}" alt="" srcset="" />
         <div class="text">
             <h3>${articles[num1].title}</h3>
-            <p>${articles[num1].content}</p>
+            <p>${articles[num1].description}</p>
             <a href="${articles[num1].url}" target = "_blank">Read More</a>
             </div>`;
 
             
         let News2 = `<div class="text">
             <h3>${articles[num2].title}</h3>
-            <p>${articles[num2].content}</p>
+            <p>${articles[num2].description}</p>
             <a href="${articles[num2].url}" target = "_blank">Read More</a>
         </div>
-        <img src="${articles[num2].urlToImage}" alt="" srcset="" />`;
+        <img src="${image2}" alt="" srcset="" />`;
 
         news1.innerHTML = News1;
         news2.innerHTML = News2;

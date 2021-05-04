@@ -37,17 +37,6 @@ app.set('views', path.join(__dirname, 'views'));
 //ENDPOINTS-------------------------------------------------------------------------------------------------
 app.get('/', (req, res) => {
     res.status(200).render('home.pug');
-
-    let articles = fetch('http://newsapi.org/v2/top-headlines?country=in&apiKey=e56e87add54441be86d6d05eb30b5134', {
-
-    })
-    .then(response => {
-        return response.json()
-    })
-    .then(Articles => {
-        console.log(Articles)
-    })
-
 })
 
 
