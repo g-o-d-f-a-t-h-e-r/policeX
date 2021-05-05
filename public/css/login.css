@@ -1,0 +1,247 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+body, html{
+    background: black;
+}
+
+#navbar{
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    user-select: none;
+    font-family: 'Eczar', serif;
+    background: rgba(31, 31, 31, 0.685);
+
+}
+
+#logo{
+    display: flex;
+    align-items: center;
+    padding-left: 40px;
+}
+
+#navbar img{
+    width: 70px;
+}
+
+#navbar h1{
+    font-family: 'Chivo', sans-serif;
+    padding-left: 20px;
+    font-size: 2.5rem;
+}
+
+#navbar h1 span{
+    font-size: 3.5rem;
+    color: rgb(248, 209, 37);
+}
+
+#navbar ul{
+    display: flex;
+}
+
+#navbar ul li{
+    padding: 0 30px;
+    list-style: none;
+    font-size: 1.6rem;
+}
+
+#navbar ul li a{
+    text-decoration: none;
+    color: white;
+    cursor: pointer;
+}
+
+.container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+
+}
+
+
+.img img{
+    opacity: 0.8;
+    width: 500px;
+    margin-top: 30px;
+    user-select: none;
+}
+
+.login-container{
+    border: 2px solid rgb(255, 217, 0);
+    /* padding: 50px; */
+    border-radius: 10px;
+    box-shadow: 0px 0px 40px rgb(255, 217, 0);
+    margin-left: 180px;
+    margin-top: 30px;
+
+}
+
+.wrapper{
+    max-width: 390px;
+    /* background: #fff; */
+    color: white;
+    padding: 40px 30px;
+    overflow: hidden;
+
+}
+
+.wrapper .title-text{
+    display: flex;
+    width: 200%;
+}
+
+.wrapper .title-text .title{
+    width: 50%;
+    font-size: 2.5rem;
+    font-weight: 500;
+    text-align: center;
+    font-family: 'Eczar', serif;
+    letter-spacing: 2px;
+    user-select: none;
+    transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.form-container .slide-controls{
+    display: flex;
+    height: 50px;
+    width: 99%;
+    margin: 30px 0 10px 0;
+    border-radius: 5px;
+    overflow: hidden;
+    justify-content: space-between;
+    /* align-items: center; */
+    border: 1px solid yellow;
+    position: relative;
+}
+
+.slide-controls .slide{
+    height: 100%;
+    width: 100%;
+    font-size: 1.4rem;
+    z-index: 1;
+    color: black;
+    font-family: 'Chivo', sans-serif;
+    font-weight: 600;
+    text-align: center;
+    line-height: 48px;
+    cursor: pointer;
+    transition: all 0.3s ease; 
+}
+
+.slide-controls .signup{
+    color: white;
+}
+
+.slide-controls .slide-tab{
+    position: absolute;
+    height: 100%;
+    width: 50%;
+    left: 0;
+    z-index: 0;
+    border-radius: 5px;
+    transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    background: -webkit-linear-gradient(left, rgb(145, 255, 0), orange);
+}
+
+input[type="radio"]{
+    display: none;
+}
+
+#signup:checked ~ .slide-tab{
+    left: 50%;
+}
+
+#signup:checked ~ .signup{
+    color: black;
+}
+
+#signup:checked ~ .login{
+    color: white;
+}
+
+.wrapper .form-container{
+    width: 100%;
+    overflow: hidden;
+    /* background: blue; */
+}
+
+.form-container .form-inner{
+    display: flex;
+    width: 200%;
+    
+}
+
+.form-container .form-inner form{
+    width: 50%;
+    transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.form-container .form-inner form .field{
+    height: 40px;
+    width: 100%;
+    margin-top: 20px;
+    /* text-align: center; */
+}
+
+.form-inner form .field input{
+
+    height: 100%;
+    width: 100%;
+    outline: none;
+    padding-left: 15px;
+    font-size: 17px;
+    border-radius: 5px;
+    /* border: 1px solid rgb(255, 217, 0); */
+    font-family: 'Chivo', sans-serif;
+    border: none;
+    
+}
+
+#inp{
+    width: 95%;
+}
+
+.form-inner form .pass-link{
+    margin-top: 10px;
+}
+
+.form-inner form .pass-link a,
+.form-inner form .signup-link a{
+    color: rgb(255, 217, 0);
+    font-family: 'Eczar', serif;
+    text-decoration: none;
+    
+}
+
+.form-inner form .pass-link a:hover,
+.form-inner form .signup-link a:hover{
+    text-decoration: underline;
+}
+
+.form-inner form .signup-link {
+    text-align: center;
+    margin-top: 30px;
+    font-family: 'Eczar', serif;
+}
+
+#btn{
+    cursor: pointer;
+    font-weight: bold;
+    background: -webkit-linear-gradient(left, rgb(145, 255, 0), orange);
+    border: none;
+    
+}
+
+#btn:hover{
+    transition-duration: 1s;
+    background: -webkit-linear-gradient(right, rgb(145, 255, 0), orange);
+}
+
+
+

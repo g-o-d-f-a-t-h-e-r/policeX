@@ -39,6 +39,10 @@ app.get('/', (req, res) => {
     res.status(200).render('home.pug');
 })
 
+app.get('/login', (req, res) => {
+    res.status(200).render('login.pug');
+})
+
 
 //Listen ---------------------------------------------------------------------------------------------------
 app.listen(port, () =>{
