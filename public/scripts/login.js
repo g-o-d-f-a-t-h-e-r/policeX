@@ -55,7 +55,6 @@ async function registerUser(event){
             })
         }).then((res) => res.json())
 
-        console.log(result)
 
         if(result.status === '1'){
             message.style.color = 'rgb(0, 255, 0)';
