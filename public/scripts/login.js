@@ -58,20 +58,22 @@ async function registerUser(event){
         console.log(result)
 
         if(result.status === '1'){
-            message.innerHTML= `Registration Successful !`;
             message.style.color = 'rgb(0, 255, 0)';
+            message.innerHTML= `Registration Successful !`;
             regForm.reset();
             loginBtn.click();
             
         }
         else if(result.status === '0'){
+            message.style.color = 'red';
             message.innerHTML = `Email ID already exists !`;
             regForm.reset();
         }
         
     }
     else{
-        message.innerHTML = `Password did not match !`
+        message.style.color = 'red';
+        message.innerHTML = `Password did not match !`    
     }
 
 
