@@ -12,19 +12,21 @@ head
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;500&display=swap" rel="stylesheet">
   <link rel="preconnect" href="https://fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;500&display=swap" rel="stylesheet">
+  <link rel="shortcut icon" type="image/x-icon" href="../public/img/logo.png" />
   title Police-X
 
 body
+  div#home
   header#nav-area
       div#navbar
           div#logo
             img(src="../public/img/logo.png", alt="", srcset="")
             h1 #[span P]olice - X
           ul
-              li #[a(href="/") Home]
+              li #[a(href="#home") Home]
               li #[a(href="http://") About Us]
               li #[a(href="#news") News]
-              li #[a(href="http://") Services]
+              li #[a(href="#services") Services]
               li #[a(href="/login") Login]
       
   div#content
@@ -83,7 +85,7 @@ body
     
 
     div.services-section
-      h2.heads featured services
+      h2.heads#services featured services
       div.line
 
       div.services
