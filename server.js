@@ -2,7 +2,7 @@ const express = require('express');
 const path = require('path');
 const body_Parser = require('body-parser');
 const mongoose = require('mongoose');
-const User = require('./model/user');
+const user = require('./model/user');
 const bcrypt = require('bcryptjs');
 
 
@@ -63,29 +63,31 @@ app.post('/api/register', async(req, res)=>{
 
     const key = await bcrypt.hash(plainTextPassword, 10);
 
-    // console.log(await bcrypt.hash(plainTextPassword, 10));
     
     console.log(plainTextPassword);
     console.log(email_address);
-    
-    try{
 
-        const response = await User.create({
-            fName: fName,
-            lName: lName,
-            email: email_address,
-            password: key
+    try{
+        
+        const response = await user.create({
+            fName,
+            lName,
+            email_address,
+            key
         })
-        console.log('User Created Successfully', response)
+        console.log('user created successfully', response);
+
+        res.json({status: '1'});
 
     }catch(error){
-        console.log(JSON.stringify(error));
+        
         if(error.code === 11000){
-            return res.json({status : "error", error: 'Username already in use' });
+            console.log(res.json({status : '0'}));
+            console.log(JSON.stringify(error));
         }
     }
 
-    res.json({ status: 'ok' })
+    
 
 })
 

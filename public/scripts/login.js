@@ -1,11 +1,11 @@
-
 const loginForm = document.querySelector("form.login");
 const signupForm = document.querySelector("form.signup");
 const loginBtn = document.querySelector("label.login");
 const signupBtn= document.querySelector("label.signup");
 const signupLink = document.querySelector(".signup-link a");
-const loginText = document.querySelector(".title-text .login")
-const signupText = document.querySelector(".title-text .signup")
+const loginText = document.querySelector(".title-text .login");
+const signupText = document.querySelector(".title-text .signup");
+const message = document.querySelector('.msg');
 
 signupBtn.onclick = (() => {
     loginForm.style.marginLeft = "-50%";
@@ -56,8 +56,26 @@ async function registerUser(event){
         }).then((res) => res.json())
 
         console.log(result)
+
+        if(result.status === '1'){
+            message.innerHTML= `Registration Successful !`;
+            message.style.color = 'rgb(0, 255, 0)';
+            regForm.reset();
+            loginBtn.click();
+            
+        }
+        else if(result.status === '0'){
+            message.innerHTML = `Email ID already exists !`;
+            regForm.reset();
+        }
+        
     }
     else{
-        console.log('Password did not match')
+        message.innerHTML = `Password did not match !`
     }
+
+
+
+
 }
+
