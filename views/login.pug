@@ -34,8 +34,8 @@ html(lang="en")
             div.login-container
                 div.wrapper
                     div.title-text
-                        div.title.login Login Form 
-                        div.title.signup Sign Up Form
+                        div.title.login Login
+                        div.title.signup Sign Up     
 
 
                     div.form-container
@@ -46,26 +46,29 @@ html(lang="en")
                             label(for="signup" class="slide signup") Sign Up  
                             div.slide-tab
                         div.form-inner
-                            form(action="#", method="post" class='login')
+                            form(action="#", method="post" class='login')#login-form
                                 div.field
-                                    input(type="email" placeholder="Email Address" required)#inp
+                                    input(type="email" placeholder="Email Address" required).inp
                                 div.field
-                                    input(type="password" placeholder="Password" required)#inp
+                                    input(type="password" placeholder="Password" required).inp
                                 div.pass-link
                                     a(href="#") Forgot Password?
                                 div.field
-                                    input(type="submit", value="Login")#btn
+                                    input(type="submit", value="Login").btn
                                 div.signup-link Not a member? 
                                     a(href="#") Signup Now 
                             
-                            form(action="#", method="post" class='login')
+                            form(action="#", method="post" class='login')#reg-form
+                                div.field#name
+                                    input(type="text" id="fName" placeholder="First Name" required).inp
+                                    input(type="text" id="lName" placeholder="Last Name" required).inp      
                                 div.field
-                                    input(type="email" placeholder="Email Address" required)#inp
+                                    input(type="email" id="emailAdd" placeholder="Email Address" required).inp
                                 div.field
-                                    input(type="password" placeholder="Password" required)#inp
+                                    input(type="password" id="pass" placeholder="Password" required).inp
                                 div.field
-                                    input(type="password" placeholder="Confirm Password" required)#inp
+                                    input(type="password" id="cpass" placeholder="Confirm Password" required).inp
                                 div.field
-                                    input(type="submit", value="Sign Up")#btn
+                                    input(type="submit", value="Sign Up").btn
         
         script(src="../public/scripts/login.js") 
