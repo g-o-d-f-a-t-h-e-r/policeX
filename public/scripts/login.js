@@ -34,7 +34,7 @@ const regForm = document.getElementById('reg-form');
 regForm.addEventListener('submit', registerUser);
 
 async function registerUser(event){
-    event.preventDefault()
+    event.preventDefault();
     const fName = document.getElementById('fName').value;
     const lName = document.getElementById('lName').value;
     const email_address = document.getElementById('emailAdd').value;
@@ -74,9 +74,6 @@ async function registerUser(event){
         message.style.color = 'red';
         message.innerHTML = `Password did not match !`    
     }
-
-
-
 
 }
 
