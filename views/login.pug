@@ -49,11 +49,11 @@ html(lang="en")
                             label(for="signup" class="slide signup") Sign Up  
                             div.slide-tab
                         div.form-inner
-                            form(action="#", method="post" class='login')#login-form
+                            form(action="/api/login" method="POST" class='login')#login-form
                                 div.field
-                                    input(type="email" placeholder="Email Address" required).inp
+                                    input(type="email" id="login-email" placeholder="Email Address" required).inp
                                 div.field
-                                    input(type="password" placeholder="Password" required).inp
+                                    input(type="password" id="login-password" placeholder="Password" required).inp
                                 div.pass-link
                                     a(href="#") Forgot Password?
                                 div.field
@@ -61,7 +61,7 @@ html(lang="en")
                                 div.signup-link Not a member? 
                                     a(href="#") Signup Now 
                             
-                            form(action="#", method="post" class='login')#reg-form
+                            form(action="/api/register" method="POST" class='login')#reg-form
                                 div.field#name
                                     input(type="text" id="fName" placeholder="First Name" required).inp
                                     input(type="text" id="lName" placeholder="Last Name" required).inp      
