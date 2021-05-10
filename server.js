@@ -32,7 +32,7 @@ let sess = {
     resave: false,
     saveUninitialized: true,
     secret: url.secret,
-    cookie: {secure: false, httpOnly: true}
+    cookie: {}
   }
    
   if (app.get('env') === 'production') {
