@@ -6,6 +6,7 @@ const User = require('./model/user');
 const bcrypt = require('bcryptjs');
 const session = require('express-session');
 const url = require('./creds/url');
+// const TWO_HOURS = 36;
 
 
 const port = process.env.PORT || 80;
@@ -38,6 +39,7 @@ let sess = {
   if (app.get('env') === 'production') {
     app.set('trust proxy', 1) // trust first proxy
     sess.cookie.secure = false // serve secure cookies
+    // sess.cookie.maxAge = TWO_HOURS;
   }
    
   app.use(session(sess))
