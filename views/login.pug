@@ -39,7 +39,12 @@ html(lang="en")
                         div.title.login Login
                         div.title.signup Sign Up   
 
-                    div.msg  
+                    if error == 'loginErr'
+                        div.msg#msg 
+                            p Invalid User ID / Password !
+                    if error == 'regErr'
+                        div.msg#msg
+                            p Email ID already exists !
 
                     div.form-container
                         div.slide-controls

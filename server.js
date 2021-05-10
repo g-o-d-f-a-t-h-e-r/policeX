@@ -4,18 +4,15 @@ const body_Parser = require('body-parser');
 const mongoose = require('mongoose');
 const User = require('./model/user');
 const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken');
-const JWT_SECRET = 'shfdjsfhuer89489fije490ur9@@*@(*FHN#*RNF(#*#&RFN#HIHIUHFUIHdkhfskjdhfe48y843984*&*^&HIHKJ';
 const session = require('express-session');
-const axios = require('axios');
-
+const url = require('./creds/url');
 
 
 const port = process.env.PORT || 80;
 
 //Express Setup ---------------------------------------------------------------------------------------------
 const app = express();
-mongoose.connect('mongodb+srv://chetan__008:chetan@1234@cluster0.nkxr5.mongodb.net/Police-X?retryWrites=true&w=majority', {
+mongoose.connect(url.url, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useCreateIndex: true
@@ -31,11 +28,11 @@ app.use(express.urlencoded({
 
 
 let sess = {
-    name : 'CHETAN',
+    name : 'Police-X',
     resave: false,
     saveUninitialized: true,
-    secret: 'keyboard cat',
-    cookie: {}
+    secret: url.secret,
+    cookie: {secure: false, httpOnly: false}
   }
    
   if (app.get('env') === 'production') {
@@ -107,13 +104,17 @@ app.post('/api/login', (req, res)=> {
                 res.redirect('/dashboard');
             }else{
 
-                res.redirect('/login')
+                res.render('login', {
+                    error : 'loginErr'
+                })
                 console.log('Invalid Email ID / Password');
             }
 
         }
         else{
-            res.redirect('/login')
+            res.render('login', {
+                error : 'loginErr'
+            })
             console.log('Invalid User ID / Password');
         }
     })
@@ -169,7 +170,9 @@ app.post('/api/register', async(req, res)=>{
                 })
         }else{
             console.log('Email ID already exists');
-            res.redirect('/login');
+            res.render('login', {
+                error : 'regErr'
+            })
         }
     })
     .catch((error) => {
@@ -184,11 +187,10 @@ app.post('/api/register', async(req, res)=>{
 
 
 // ---------------------------------------------- DASHBOARD -----------------------------------------------------
+
 app.get('/dashboard', redirectLogin, (req, res) => {
     res.status(200).render('dashboard.pug');
 })
-
-
 
 
 //Listen ---------------------------------------------------------------------------------------------------
