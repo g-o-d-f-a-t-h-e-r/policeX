@@ -7,6 +7,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const JWT_SECRET = 'shfdjsfhuer89489fije490ur9@@*@(*FHN#*RNF(#*#&RFN#HIHIUHFUIHdkhfskjdhfe48y843984*&*^&HIHKJ';
 const session = require('express-session');
+const axios = require('axios');
 
 
 
@@ -22,6 +23,13 @@ mongoose.connect('mongodb+srv://chetan__008:chetan@1234@cluster0.nkxr5.mongodb.n
 
 app.use('/public', express.static('public'));
 app.use(body_Parser.json())
+app.use(express.json());
+app.use(express.urlencoded({
+    extended: false
+}));
+
+
+
 let sess = {
     name : 'CHETAN',
     resave: false,
@@ -43,11 +51,10 @@ app.set('views', path.join(__dirname, 'views'));
 
 
 
-//middleware for session
-
+//middleware for session----------------------------------------------------------------------------
 function redirectLogin(req, res, next) {
 
-    if(!req.session.emailID){
+    if(!req.session.ID){
         res.redirect('/login');
     }
     else{
@@ -57,9 +64,8 @@ function redirectLogin(req, res, next) {
 }
 
 function redirectHome(req, res, next){
-    console.log(req.session);
-
-    if(req.session.emailID){
+    
+    if(req.session.ID){
         res.redirect('/dashboard');
     }
     else{
@@ -75,7 +81,6 @@ app.get('/', (req, res) => {
 
 app.get('/login', redirectHome, (req, res) => {
     res.status(200).render('login.pug');
-
 })
 
 // ------------------------------------------------------------------------------------------------------------
@@ -84,32 +89,38 @@ app.get('/login', redirectHome, (req, res) => {
 
 
 // ----------------------------------------- LOGIN ------------------------------------------------------------
-app.post('/api/login', async (req, res)=> {
-    const { loginEmail, loginPassword } = req.body
-    const user = await User.findOne({ email_address : loginEmail }).lean();
+app.post('/api/login', (req, res)=> {
 
-    console.log(!user)
+    const {loginEmail, loginPassword} = req.body;
 
-    if(!user){
-        return res.json({ status : 'error', data : 'Invalid Email ID / Password' });
-    }
+    const user = User.findOne({
+        emailAdd : loginEmail
+    })
+    .then(async (user) => {
+        if(user){
+            const status = await bcrypt.compare(loginPassword, user.key);
 
-    if(await bcrypt.compare(loginPassword, user.key)){
+            if(status){
+                req.session.ID = user._id;
+                req.session.emailAdd = user.emailAdd;
 
-        const token = jwt.sign({ 
-            _id : user._id, 
-            email_address : user.email_address,
-        },
-        JWT_SECRET
-        )
+                res.redirect('/dashboard');
+            }else{
 
-        req.session.emailID = user.email_address;
-        console.log(req.session);
+                res.redirect('/login')
+                console.log('Invalid Email ID / Password');
+            }
 
-        return res.json({ status : 'ok', data : token });
-    }
+        }
+        else{
+            res.redirect('/login')
+            console.log('Invalid User ID / Password');
+        }
+    })
+    .catch((error) => {
+        console.log(error);
+    })
 
-    // res.json({status : 'error', data : 'Invalid Email ID / Password'});
 })
 
 // -------------------------------------------------------------------------------------------------------------
@@ -121,43 +132,52 @@ app.post('/api/login', async (req, res)=> {
 // ------------------------------------------SIGNUP -------------------------------------------------------------
 app.post('/api/register', async(req, res)=>{
         
-    const { fName, lName, email_address, pass: plainTextPassword} = req.body
-
-    const key = await bcrypt.hash(plainTextPassword, 10);
-
+    const { fName, lName, emailAdd, pass } = req.body;
     
-    console.log(plainTextPassword);
-    console.log(email_address);
+    console.log(pass);
+    console.log(emailAdd);
 
-    try{
-        
-        const response = await User.create({
-            fName,
-            lName,
-            email_address,
-            key
-        })
-        console.log('user created successfully', response);
+    const key = await bcrypt.hash(pass, 10);
 
-        //Create session ----------------------
-        req.session.emailID = email_address;
-        console.log(req.session);
+    User.findOne({
+        emailAdd
+    })
+    .then((user) => {
+        if(!user){
 
-        res.json({status: '1'});
-        // res.redirect('/dashboard');
+            const userObj = {
+                fName : fName,
+                lName : lName,
+                emailAdd : emailAdd,
+                key : key
+            }
 
-    }catch(error){
-        
-        if(error.code === 11000){
-            console.log(res.json({status : '0'}));
-            console.log(JSON.stringify(error));
+            new User(userObj).save()
+                .then((user) => {
+                    console.log('User Registered')
+
+                    req.session.ID = user._id;
+                    req.session.emailAdd = user.emailAdd;
+
+                    console.log('session', req.session);
+
+                    res.redirect('/dashboard');
+
+                })
+                .catch((error) => {
+                    console.log('Unable to save into database', error);
+                })
+        }else{
+            console.log('Email ID already exists');
+            res.redirect('/login');
         }
-        throw error;
-    }
+    })
+    .catch((error) => {
+        console.log(error);
+    })
 
 })
 // -------------------------------------------------------------------------------------------------------------
-
 
 
 

@@ -51,9 +51,9 @@ html(lang="en")
                         div.form-inner
                             form(action="/api/login" method="POST" class='login')#login-form
                                 div.field
-                                    input(type="email" id="login-email" placeholder="Email Address" required).inp
+                                    input(type="email" id="loginEmail" name="loginEmail" placeholder="Email Address" required).inp
                                 div.field
-                                    input(type="password" id="login-password" placeholder="Password" required).inp
+                                    input(type="password" id="loginPassword" name="loginPassword" placeholder="Password" required).inp
                                 div.pass-link
                                     a(href="#") Forgot Password?
                                 div.field
@@ -63,14 +63,14 @@ html(lang="en")
                             
                             form(action="/api/register" method="POST" class='login')#reg-form
                                 div.field#name
-                                    input(type="text" id="fName" placeholder="First Name" required).inp
-                                    input(type="text" id="lName" placeholder="Last Name" required).inp      
+                                    input(type="text" id="fName" name="fName" placeholder="First Name" required).inp
+                                    input(type="text" id="lName" name="lName" placeholder="Last Name" required).inp      
                                 div.field
-                                    input(type="email" id="emailAdd" placeholder="Email Address" required).inp
+                                    input(type="email" id="emailAdd" name="emailAdd" placeholder="Email Address" required).inp
                                 div.field
-                                    input(type="password" id="pass" placeholder="Password" required).inp
+                                    input(type="password" id="pass" name="pass" placeholder="Password" required).inp
                                 div.field
-                                    input(type="password" id="cpass" placeholder="Confirm Password" required).inp
+                                    input(type="password" id="cpass" name="cpass" placeholder="Confirm Password" required).inp
                                 div.field
                                     input(type="submit", value="Sign Up").btn
         
