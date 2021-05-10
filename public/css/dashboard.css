@@ -1,0 +1,23 @@
+*{
+    margin : 0;
+    padding : 0;
+}
+
+html{
+    text-align: center;
+}
+
+#btn{
+    padding : 8px 30px;
+    margin: 50px;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    background-color:rgb(110, 226, 255);
+    cursor: pointer;
+    transition-duration: 0.2s;
+}
+
+#btn:hover{
+    background-color:rgb(59, 213, 252);
+}
