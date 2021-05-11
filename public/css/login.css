@@ -4,7 +4,8 @@
 }
 
 body, html{
-    background: black;
+    /* background-color: rgb(11, 11, 24); */
+    background-color: black;
 }
 
 #navbar{

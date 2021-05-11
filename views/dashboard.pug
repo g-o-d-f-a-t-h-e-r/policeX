@@ -16,8 +16,52 @@ html(lang="en")
         <link rel="shortcut icon" type="image/x-icon" href="../public/img/logo.png" />
         title Welcome to Police-X
     body 
-        h1 DASHBOARD 
-        p Welcome to Dashboard 
+        header#nav-area
+        div#navbar
+            a(href="http://policex.herokuapp.com").logo 
+                div#logo
+                    img(src="../public/img/logo.png", alt="", srcset="")
+                    h1 #[span P]olice - X
+            ul
+                li #[a(href='/') Home]
+                li #[a(href="http://") About Us]
+                li #[a(href="#news") News]
+                li #[a(href="http://") Services] 
+                form(action="/logout", method="post") 
+                    button#btn Logout
 
-        form(action="/logout", method="post") 
-            button#btn Logout
+        div#content
+            div.userDashboard
+                h1 USER DASHBOARD
+
+            div.welcome
+                p Welcome, #[span(style = "color: rgb(1, 75, 97); text-transform : uppercase") #{fName} !]
+
+            div.cards-section
+                div.cards
+                    div.card
+                        a(href="/myProfile") 
+                            <img class = "img" src="https://img.icons8.com/ios-filled/100/000000/user-male-circle.png"/>
+                        a(href="/myProfile")  My Profile
+                    div.card
+                        a(href="/fileFIR") 
+                            <img class="img" src="https://img.icons8.com/ios-filled/100/000000/policeman-male--v1.png"/>
+                        a(href="/fileFIR")  File FIR 
+                    div.card
+                        a(href="myCases") 
+                            <img class="img" src="https://img.icons8.com/ios-filled/100/000000/add-bookmark.png"/>
+                        a(href="myCases")  My Cases
+                div.cards
+                    div.card
+                        a(href="/inform") 
+                            <img class="img" src="https://img.icons8.com/material-rounded/100/000000/info-squared.png"/>
+                        a(href="/inform")  Inform about some mishappenings
+                    div.card
+                        a(href="/missingPerson") 
+                            <img class="img" src="https://img.icons8.com/carbon-copy/100/000000/ask-question.png"/>
+                        a(href="/missingPerson")  Report Missing Person
+                    div.card
+                        a(href="/accountSettings") 
+                            <img class="img" src="https://img.icons8.com/cotton/512/000000/settings--v1.png"/>
+                        a(href="/accountSettings") Account Settings
+                    

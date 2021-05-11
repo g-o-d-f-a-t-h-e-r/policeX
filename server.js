@@ -100,6 +100,8 @@ app.post('/api/login', (req, res)=> {
             if(status){
                 req.session.ID = user._id;
                 req.session.emailAdd = user.emailAdd;
+                req.session.fName = user.fName;
+                req.session.lName = user.lName;
 
                 res.redirect('/dashboard');
             }else{
@@ -157,6 +159,8 @@ app.post('/api/register', async(req, res)=>{
 
                     req.session.ID = user._id;
                     req.session.emailAdd = user.emailAdd;
+                    req.session.fName = user.fName;
+                    req.session.lName = user.lName;
 
                     console.log('session', req.session);
 
@@ -185,12 +189,36 @@ app.post('/api/register', async(req, res)=>{
 // ---------------------------------------------- DASHBOARD -----------------------------------------------------
 
 app.get('/dashboard', redirectLogin, (req, res) => {
-    res.status(200).render('dashboard.pug');
+    res.status(200).render('dashboard.pug', {
+        fName: req.session.fName,
+    });
 })
 
 // -------------------------------------------------------------------------------------------------------------
 
+app.get('/myProfile', redirectLogin, (req, res) => {
+    res.status(200).render('ahed.pug')
+})
 
+app.get('/fileFIR', redirectLogin, (req, res) => {
+    res.status(200).render('ahed.pug')
+})
+
+app.get('/myCases', redirectLogin, (req, res) => {
+    res.status(200).render('ahed.pug')
+})
+
+app.get('/inform', redirectLogin, (req, res) => {
+    res.status(200).render('ahed.pug')
+})
+
+app.get('/missingPerson', redirectLogin, (req, res) => {
+    res.status(200).render('ahed.pug')
+})
+
+app.get('/accountSettings', redirectLogin, (req, res) => {
+    res.status(200).render('ahed.pug')
+})
 
 // -------------------------------------------------LOGOUT ------------------------------------------------------
 
