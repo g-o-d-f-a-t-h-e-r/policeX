@@ -119,6 +119,7 @@ html{
     letter-spacing: 2.5px;
     font-weight: bold;
     font-family: 'Chivo', sans-serif;
+    user-select: none;
 }
 
 .cards-section{
