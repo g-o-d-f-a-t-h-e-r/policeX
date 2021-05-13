@@ -1,0 +1,180 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(http-equiv="X-UA-Compatible", content="IE=edge")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Chivo:wght@300&family=Eczar&display=swap" rel="stylesheet"> 
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;700&display=swap" rel="stylesheet">
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;500&display=swap" rel="stylesheet">
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;500&display=swap" rel="stylesheet">
+        <link rel="shortcut icon" type="image/x-icon" href="../public/img/logo.png" />
+        link(rel="stylesheet", href="../public/css/editProfile.css")
+        script(src="https://kit.fontawesome.com/a076d05399.js") 
+        title Edit Profile
+    body 
+        header#nav-area
+        div#navbar
+            a(href="http://policex.herokuapp.com").logo 
+                div#logo
+                    img(src="../public/img/logo.png", alt="", srcset="")
+                    h1 #[span P]olice - X
+            ul
+                li #[a(href='/dashboard') Dashboard]
+                //- li #[a(href="http://") About Us]
+                li #[a(href="#news") News]
+                li #[a(href="http://") Services] 
+                form(action="/logout", method="post") 
+                    button#btn Logout
+
+        div#content
+            div.userDashboard
+                h1 Edit Profile
+
+            div.welcome
+                p Welcome, #[span(style = "color: rgb(1, 75, 97); text-transform : uppercase; text-shadow: 0px 0 1px #000") #{fName} !]
+
+            div.backButton  
+                a(href="/myProfile") Back 
+
+            div.form
+                form(action="/editProfile", method="post" enctype = "multipart/form-data")
+                    p INITIALS 
+                    hr
+                    div.initials
+                        p First Name : #[span(style ="font-family: 'Chivo', sans-serif; font-size : 1.3rem") #{fName}]
+                        p Last Name : #[span(style ="font-family: 'Chivo', sans-serif; font-size : 1.3rem") #{lName}]
+                    
+                    p UPLOAD IMAGES
+                    hr
+                    div.uploads
+                        div.profilePhoto
+
+                            div.yourPhoto
+                                //- p  Profile Photo :
+                            div.container1
+                                div.wrapper1
+                                    div.image
+                                        img(src="" altsrc="")#img1
+                                    div.content
+                                        div.icon
+                                            i.fas.fa-cloud-upload-alt
+                                        div.text Upload Profile Photo
+                                    div#cancel-btn1
+                                        i.fas.fas.fa-times
+                                    div.file-name#fileName1
+                                input(type="file" name="profilePhoto" hidden required)#default-btn1
+                                p(onclick ="defaultBtnActive1()")#custom-btn1 Choose a File 
+                        
+                        div.aadharCardImage
+                            div.yourPhoto
+                                //- p  Aadhar Photo :
+                            div.container2
+                                div.wrapper2
+                                    div.image
+                                        img(src="" altsrc="")#img2
+                                    div.content
+                                        div.icon
+                                            i.fas.fa-cloud-upload-alt
+                                        div.text Upload Aadhar Card Image
+                                    div#cancel-btn2
+                                        i.fas.fas.fa-times
+                                    div.file-name#fileName2
+                                input(type="file" name ="aadharCardImage" hidden required)#default-btn2
+                                p(onclick ="defaultBtnActive2()")#custom-btn2 Choose a File
+
+                    p OTHER INFORMATION
+                    hr
+
+                    div.otherInfo
+                        div.sec1
+                            p Gender :
+                            div
+                                input(type = "radio" name="gender" value="Male" required)
+                                | Male
+
+                            div   
+                                input(type = "radio" name="gender" value="Female")
+                                |  Female
+
+                            div    
+                                input(type = "radio" name="gender" value="Others")
+                                | Others
+                                
+                    
+                        div.sec2
+                            p D.O.B :
+                            input(type="date", name="dob" required)#dob
+
+                        div.religion
+                            p Religion :
+                            select(name='religion' required)
+                                option(disabled selected value) --Select a Religion--
+                                option(value="Hindu") Hindu
+                                option(value="Muslim") Muslim
+                                option(value="Sikhs") Sikhs
+                                option(value="Christian") Christians
+                                option(value="Others") Others
+
+                        div.sec1
+                            p Cast :
+                            div
+                                input(type = "radio" name="cast" value="SC" required)
+                                | SC
+
+                            div   
+                                input(type = "radio" name="cast" value="ST")
+                                |  ST
+
+                            div    
+                                input(type = "radio" name="cast" value="OBC")
+                                | OBC
+
+                            div    
+                                input(type = "radio" name="cast" value="General")
+                                | General
+
+                        div.phone
+                            p Phone Number :
+                            input(type="number", name="phoneNo" placeholder="10 digits Phone Number" required)
+
+                        div.aadharNo
+                            p Aadhar Number :
+                            input(type="number", name="aadharNo" placeholder="12 digits Aadhar Number" required)
+
+
+                    p ADDRESS DETAILS
+                    hr
+
+                    div.address
+                        p Address : 
+                        div.addresslines
+                            input(type="text" name="addressLine1" placeholder="Address Line 1" required)
+                            input(type="text" name="addressLine2" placeholder="Address Line 2" required)
+                            input(type="text" name="addressLine3" placeholder="Address Line 3" required)
+
+                    div.pincode
+                        p Pincode : 
+                        input(type="number" name="pincode" placeholder="Pincode" required)
+
+
+                    p DECLARATION
+                    hr
+
+                    div.undertaking
+                        p I hereby declare that the details furnished above are true and correct to the best of my knowledge and belief and I undertake the responsibility to inform about any changes therein, immediately.
+                        input(type="checkbox", name="status" value = 1 required)
+                        label(for="status") I agree to the above Terms & Conditions
+
+                    div.submit
+                        input(type="submit", value="Submit")
+
+                    
+
+
+
+        script(src="../public/scripts/editProfile.js") 

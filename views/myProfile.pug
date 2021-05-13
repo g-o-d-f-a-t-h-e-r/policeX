@@ -1,0 +1,93 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(http-equiv="X-UA-Compatible", content="IE=edge")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Chivo:wght@300&family=Eczar&display=swap" rel="stylesheet"> 
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;700&display=swap" rel="stylesheet">
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;500&display=swap" rel="stylesheet">
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;500&display=swap" rel="stylesheet">
+        <link rel="shortcut icon" type="image/x-icon" href="../public/img/logo.png" />
+        link(rel="stylesheet", href="../public/css/myProfile.css")
+        title Your Profile
+    body
+        header#nav-area
+        div#navbar
+            a(href="http://policex.herokuapp.com").logo 
+                div#logo
+                    img(src="../public/img/logo.png", alt="", srcset="")
+                    h1 #[span P]olice - X
+            ul
+                li #[a(href='/dashboard') Dashboard]
+                //- li #[a(href="http://") About Us]
+                li #[a(href="#news") News]
+                li #[a(href="http://") Services] 
+                form(action="/logout", method="post") 
+                    button#btn Logout
+
+        div#content
+            div.userDashboard
+                h1 USER PROFILE
+
+            div.welcome
+                p Welcome, #[span(style = "color: rgb(1, 75, 97); text-transform : uppercase; text-shadow: 0px 0 1px #000") #{fName} !]
+
+        div.editButton
+            if status == 0
+                a(href="/editProfile") Complete User Profile
+            else 
+                a(href="/editProfile") Edit Profile
+        
+       
+        div.profile-section
+            hr
+            h2 Your Profile
+            hr
+            div.msg
+                p #{msg}
+            div.profile
+                div.firstSection.section
+                    p #[span(style="font-family: 'Eczar', serif; font-size: 1.4rem") First Name :] #{fName}
+                    p #[span(style="font-family: 'Eczar', serif; font-size: 1.4rem") Last Name :] #{lName}
+                    div.img1
+                        img(src="https://img.icons8.com/ios-filled/100/000000/user-male-circle.png", alt="Profile Photo", id="img1")
+                        //- img(src="../public/img/cyber-crime.jpg", alt="Profile Photo", id="img1")
+                
+                div.secondSection.section
+                    p #[span(style="font-family: 'Eczar', serif; font-size: 1.4rem") Gender :] #{gender}
+                    p #[span(style="font-family: 'Eczar', serif; font-size: 1.4rem") DOB :] #{dob}
+                    p(style="width: 155px")
+
+                div.thirdSection.section
+                    p #[span(style="font-family: 'Eczar', serif; font-size: 1.4rem") Religion :] #{religion}
+                    p #[span(style="font-family: 'Eczar', serif; font-size: 1.4rem") Cast :] #{cast}
+                    p(style="width: 175px")
+                    
+                
+                div.fourthSection.section
+                    p #[span(style="font-family: 'Eczar', serif; font-size: 1.4rem") Phone No. :] +91-#{phoneNo}
+                
+                div.fifthSection
+                    p #[span(style="font-family: 'Eczar', serif; font-size: 1.4rem") Address line 1 :] #{addLine1}
+                    p #[span(style="font-family: 'Eczar', serif; font-size: 1.4rem") Address line 2 :] #{addLine2}
+                    p #[span(style="font-family: 'Eczar', serif; font-size: 1.4rem") Address line 3 :] #{addLine3}
+                
+                div.sixthSection.section
+                    p #[span(style="font-family: 'Eczar', serif; font-size: 1.4rem") Aadhaar No :] #{aadharNo}
+                    div.img2
+                        img(src="../public/img/aadhaar.png", alt="Profile Photo", id="img2")
+                    p(style="width: 30px")
+                
+                    
+            hr
+
+        div.editButton  
+            if status == 0
+                a(href="/editProfile") Complete User Profile
+            else 
+                a(href="/editProfile") Edit Profile             

@@ -18,6 +18,7 @@ body{
     transition: top 0.4s;
     background: rgba(0, 0, 0, 0.6);
     overflow: hidden;
+    z-index: 1;
     
     
 }

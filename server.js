@@ -3,6 +3,7 @@ const path = require('path');
 const body_Parser = require('body-parser');
 const mongoose = require('mongoose');
 const User = require('./model/user');
+const userProfile = require('./model/userProfile')
 const bcrypt = require('bcryptjs');
 const session = require('express-session');
 const url = require('./creds/url');
@@ -197,7 +198,61 @@ app.get('/dashboard', redirectLogin, (req, res) => {
 // -------------------------------------------------------------------------------------------------------------
 
 app.get('/myProfile', redirectLogin, (req, res) => {
-    res.status(200).render('ahed.pug')
+    
+    
+    const user = userProfile.findOne({
+        emailAdd : req.session.emailAdd,
+    })
+    .then((user) => {
+        if(user){
+            res.status(200).render('myProfile.pug', {
+                fName : req.session.fName,
+                lName : req.session.lName,
+                gender : user.gender,
+                dob : user.dob,
+                religion : user.religion,
+                cast : user.cast,
+                phoneNo : user.phoneNo,
+                addLine1 : user.addline1,
+                addLine2 : user.addline2,
+                addLine3 : user.addline3,
+                pincode : user.pincode,
+                aadharNo : user.aadharNo,
+                status : user.status
+                
+            })
+        }else{
+            res.status(200).render('myProfile.pug', {
+                fName : req.session.fName,
+                lName : req.session.lName,  
+                gender : "NA",
+                dob : "NA",
+                religion : "NA",
+                cast : "NA",
+                phoneNo : "XXXXXXXXXX",
+                addLine1 : "NA",
+                addLine2 : "NA",
+                addLine3 : "NA",
+                pincode : "NA",
+                aadharNo : "XXXXXXXXXXXX",
+                status : 0,
+                msg : "You need to complete your USER PROFILE in order to file FIRs."    
+            })
+        }
+    })
+    .catch((error) => {
+        console.log("Something went wrong searching the userProfile collection")
+        console.log(error);
+    })
+      
+})
+
+app.get('/editProfile', redirectLogin, (req, res) => {
+    res.status(200).render('editProfile.pug', {
+        fName : req.session.fName,
+        lName : req.session.lName,
+        emailAdd : req.session.emailAdd
+    })
 })
 
 app.get('/fileFIR', redirectLogin, (req, res) => {

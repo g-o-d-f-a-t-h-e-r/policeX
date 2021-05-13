@@ -23,8 +23,8 @@ html(lang="en")
                     img(src="../public/img/logo.png", alt="", srcset="")
                     h1 #[span P]olice - X
             ul
-                li #[a(href='/') Home]
-                li #[a(href="http://") About Us]
+                li #[a(href='/dashboard') Dashboard]
+                //- li #[a(href="http://") About Us]
                 li #[a(href="#news") News]
                 li #[a(href="http://") Services] 
                 form(action="/logout", method="post") 
@@ -35,7 +35,7 @@ html(lang="en")
                 h1 USER DASHBOARD
 
             div.welcome
-                p Welcome, #[span(style = "color: rgb(1, 75, 97); text-transform : uppercase") #{fName} !]
+                p Welcome, #[span(style = "color: rgb(1, 75, 97); text-transform : uppercase; text-shadow: 0px 0 1px #000") #{fName} !]
 
             div.cards-section
                 div.cards
