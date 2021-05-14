@@ -202,8 +202,8 @@ html{
 
 .img1{
     border: 1px solid rgb(1, 75, 97);
-    width: 130px;
-    height: 150px;
+    width: 150px;
+    height: 180px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -212,13 +212,16 @@ html{
 }
 
 #img1{
-    width: 90%;
+    width: 99%;
+    height: 99%;
+    background-color: rgb(12, 47, 90);
 }
 
 .img2{
     border: 1px solid rgb(1, 75, 97);
     border-radius: 10px;
     width: 350px;
+    height: 200px;
     display: flex;
     align-items: center;
     justify-content: center;

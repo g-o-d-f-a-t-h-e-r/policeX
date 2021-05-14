@@ -55,13 +55,22 @@ html(lang="en")
                     p #[span(style="font-family: 'Eczar', serif; font-size: 1.4rem") First Name :] #{fName}
                     p #[span(style="font-family: 'Eczar', serif; font-size: 1.4rem") Last Name :] #{lName}
                     div.img1
-                        img(src="https://img.icons8.com/ios-filled/100/000000/user-male-circle.png", alt="Profile Photo", id="img1")
+                        if status === 0
+                            <img src="https://img.icons8.com/fluent/100/000000/gender-neutral-user.png" id="img1">
+                        else
+                            img(src="/image1/:filename", alt="Profile Photo", id="img1")
                         //- img(src="../public/img/cyber-crime.jpg", alt="Profile Photo", id="img1")
                 
                 div.secondSection.section
                     p #[span(style="font-family: 'Eczar', serif; font-size: 1.4rem") Gender :] #{gender}
-                    p #[span(style="font-family: 'Eczar', serif; font-size: 1.4rem") DOB :] #{dob}
+                    
                     p(style="width: 155px")
+
+                div.secondSection.section
+                    if status === 0
+                        p #[span(style="font-family: 'Eczar', serif; font-size: 1.4rem") DOB :] #{dob}
+                    else
+                        p #[span(style="font-family: 'Eczar', serif; font-size: 1.4rem") DOB :] #{dob.getDate()}-#{dob.getMonth()+1}-#{dob.getFullYear()}
 
                 div.thirdSection.section
                     p #[span(style="font-family: 'Eczar', serif; font-size: 1.4rem") Religion :] #{religion}
@@ -80,7 +89,10 @@ html(lang="en")
                 div.sixthSection.section
                     p #[span(style="font-family: 'Eczar', serif; font-size: 1.4rem") Aadhaar No :] #{aadharNo}
                     div.img2
-                        img(src="../public/img/aadhaar.png", alt="Profile Photo", id="img2")
+                        if status === 0
+                            img(src="../public/img/aadhar.png", alt="Aadhar Card Image" id="img1")
+                        else
+                            img(src="/image2/:filename", alt="Aadhar Card Image", id="img2")
                     p(style="width: 30px")
                 
                     
