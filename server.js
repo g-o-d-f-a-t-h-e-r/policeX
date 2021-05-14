@@ -282,7 +282,7 @@ app.get('/dashboard', redirectLogin, (req, res) => {
 // -------------------------------------------------------------------------------------------------------------
 
 // Middleware forGetting profilePhoto from the GFS Chunks ---------------------
-app.get('/image1/:filename', redirectLogin,  (req,res) => {
+app.get('/profilePhoto/:filename', redirectLogin,  (req,res) => {
 
     userProfile.findOne({
         emailAdd : req.session.emailAdd,
@@ -313,7 +313,7 @@ app.get('/image1/:filename', redirectLogin,  (req,res) => {
 })
 
 // Middleware for Getting profilePhoto from the GFS Chunks ---------------------
-app.get('/image2/:filename', redirectLogin, (req,res) => {
+app.get('/aadharCardImage/:filename', redirectLogin, (req,res) => {
 
     const user = userProfile.findOne({
         emailAdd : req.session.emailAdd,
