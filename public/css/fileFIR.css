@@ -8,7 +8,6 @@ html{
     background-color: rgb(233, 233, 233);
 }
 
-
 /* width */
 ::-webkit-scrollbar {
     width: 8px;
@@ -101,12 +100,12 @@ html{
 #btn{
     padding :10px 25px;
     /* margin-top: 2px; */
+    border: none;
     font-family: 'Chivo', sans-serif;
     font-weight: bold;
     text-shadow: 0 0 1px #000;
     font-size: 1.2rem;
     color: black;
-    border: none;
     outline: none;
     border-radius: 100px;
     background-color:rgb(110, 226, 255);
@@ -119,7 +118,6 @@ html{
 #btn:hover{
     background-color:rgb(59, 213, 252);
 }
-
 
 .userDashboard{
     background-color:rgb(110, 226, 255);
@@ -151,63 +149,4 @@ html{
     font-weight: bold;
     font-family: 'Chivo', sans-serif;
     user-select: none;
-}
-
-.cards-section{
-    /* border: 1px solid black; */
-    border-radius: 10px;
-    padding: 0px 50px;
-    margin: 8px 200px;
-}
-
-.cards{
-    display: flex;
-    justify-content: space-evenly;
-}
-
-.card{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    width: 33.33vw; 
-    /* box-shadow: 0px 0px 10px grey; */
-    margin: 50px;
-    /* padding: 30px;   */
-    height: 17vh;
-    text-align: center;
-    border-radius: 1000px;
-    
-}
-
-.card a{
-    margin-top: 10px;
-    font-size: 1.1rem;
-    font-family: 'Chivo', sans-serif;
-    font-weight: bold;
-    text-decoration: none;
-    color: rgb(1, 75, 97);
-    transition-duration: 0.2s;
-    user-select: none;
-}
-
-.card a:hover{
-    color: black;
-    text-shadow: 0 0 1px #000;
-    
-}
-
-.img{
-    width: 150px;
-    box-shadow: 0px 0px 10px rgb(0, 0, 0);
-    border: 3px solid rgb(24, 195, 247);
-    border-radius: 1000px;
-    user-select: none;
-    cursor: pointer;
-    transition-duration: 0.3s;
-}
-
-.img:hover{
-    box-shadow: 0px 0px 30px rgb(0, 0, 0);
-    border: 3px solid rgb(7, 144, 185);
 }

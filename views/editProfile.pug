@@ -40,9 +40,12 @@ html(lang="en")
 
             div.backButton  
                 a(href="/myProfile") Back 
+            
+            div.msg
+                p #{msg}
 
             div.form
-                form(action="/editProfile", method="post" enctype = "multipart/form-data")
+                form(action="/editProfile", method="post" enctype = "multipart/form-data" onsubmit= "openModal()")
                     p INITIALS 
                     hr
                     div.initials
@@ -57,6 +60,8 @@ html(lang="en")
                             div.yourPhoto
                                 //- p  Profile Photo :
                             div.container1
+                                div.msg1
+                                    p Please upload Profile Photo !
                                 div.wrapper1
                                     div.image
                                         img(src="" altsrc="")#img1
@@ -67,13 +72,16 @@ html(lang="en")
                                     div#cancel-btn1
                                         i.fas.fas.fa-times
                                     div.file-name#fileName1
-                                input(type="file" name="profilePhoto" hidden required)#default-btn1
+                                input(type="file" name="profilePhoto" hidden required)#default-btn1.input1
+                                p Profile Photo
                                 p(onclick ="defaultBtnActive1()")#custom-btn1 Choose a File 
                         
                         div.aadharCardImage
                             div.yourPhoto
                                 //- p  Aadhar Photo :
                             div.container2
+                                div.msg2
+                                    p Please upload Aadhar Card Image !
                                 div.wrapper2
                                     div.image
                                         img(src="" altsrc="")#img2
@@ -84,7 +92,8 @@ html(lang="en")
                                     div#cancel-btn2
                                         i.fas.fas.fa-times
                                     div.file-name#fileName2
-                                input(type="file" name ="aadharCardImage" hidden required)#default-btn2
+                                input(type="file" name ="aadharCardImage" hidden required)#default-btn2.input2
+                                p Aadhar Card Image
                                 p(onclick ="defaultBtnActive2()")#custom-btn2 Choose a File
 
                     p OTHER INFORMATION
@@ -112,7 +121,7 @@ html(lang="en")
 
                         div.religion
                             p Religion :
-                            select(name='religion' required)
+                            select(name='religion' required).input
                                 option(disabled selected value) --Select a Religion--
                                 option(value="Hindu") Hindu
                                 option(value="Muslim") Muslim
@@ -171,9 +180,18 @@ html(lang="en")
                         label(for="status") I agree to the above Terms & Conditions
 
                     div.submit
-                        input(type="submit", value="Submit")
+                        input(type="submit", value="Submit").submit
 
-                    
+                    div.modal#modal
+                        div.modal-body
+                            img(src="../public/img/loader.gif", alt="", srcset="")
+                            p Uploading ! Please Wait ...
+
+                    div.modal2
+                        p Profile Photo and Aadhar Card Image is necessary...
+
+                    div#overlay
+
 
 
 

@@ -176,6 +176,16 @@ html{
     background-color:rgb(59, 213, 252);
 }
 
+.msg{
+    color: red;
+    font-family: 'Eczar', serif;
+    text-align: center;
+    /* font-weight: bold; */
+    text-shadow: 0 0 1px #000;
+    font-size: 1.2rem;
+    margin-top: 50px;
+}
+
 .form{
     margin: 60px;
     font-size: 1.3rem;
@@ -214,6 +224,27 @@ html{
     /* width: 60%;   */
 }
 
+
+.msg1, .msg2{
+    font-family: 'chivo', sans-serif;
+    color: red;
+    font-size: 1.1rem;
+    text-align: center;
+    margin: 10px;
+    height: 20px;
+}
+
+.msg1 p, .msg2 p{
+    display: none;
+}
+
+.msg1 p.active{
+    display: block;
+}
+
+.msg2 p.active{
+    display: block;
+}
 
 .container1{
 width: 300px;
@@ -656,4 +687,76 @@ width: 500px;
 
 .submit input:hover{
     background-color:rgb(59, 213, 252);
+}
+
+
+
+
+/*  CSS for Modal ----------------------------------------------------------------------------------- */
+.modal{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position : fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    transition: 200ms ease-in-out;
+    border: 1px solid black;
+    border-radius: 10px;
+    z-index: 3;
+    background-color: #fff;
+    width: 400px;
+    height: 150px;
+    text-align: center;
+    user-select: none;
+}
+
+.modal.active{
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.modal img{
+    width: 50px;
+}
+
+#overlay{
+    position: fixed;
+    opacity: 0;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0,0,0,0.7);
+    z-index: 1;
+    pointer-events: none;
+    transition: 200ms ease-in-out;
+}
+
+#overlay.active{
+    pointer-events: all;
+    opacity : 1;
+}
+
+.modal2{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position : fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    transition: 200ms ease-in-out;
+    border: 1px solid black;
+    border-radius: 10px;
+    z-index: 3;
+    background-color: #fff;
+    width: 500px;
+    height: 150px;
+    text-align: center;
+    user-select: none;
+}
+
+.modal2.active{
+    transform: translate(-50%, -50%) scale(1);
 }

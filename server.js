@@ -505,7 +505,31 @@ app.post('/editProfile', upload.fields([{ name : 'profilePhoto', maxCount : 1 },
 
 // --------------------------------------------------FILE FIR -----------------------------------------------------
 app.get('/fileFIR', redirectLogin, (req, res) => {
-    res.status(200).render('ahed.pug')
+
+    userProfile.findOne({
+        emailAdd : req.session.emailAdd
+    })
+    .then((user) => {
+        if(!user){
+            res.status(200).render('editProfile.pug', {
+                emailAdd : req.session.emailAdd,
+                fName : req.session.fName,
+                lName : req.session.lName,
+                msg : 'Complete your User Profile First !'
+            })
+        }
+        else{
+            res.status(200).render('fileFIR.pug',{
+                emailAdd : req.session.emailAdd,
+                fName : req.session.fName,
+                lName : req.session.lName,
+            })
+        }
+    })
+    .catch((error) => {
+        console.log("Something went wrong in searching the database", error)
+    })
+    
 })
 
 app.get('/myCases', redirectLogin, (req, res) => {
