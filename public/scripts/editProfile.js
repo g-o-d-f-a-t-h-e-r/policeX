@@ -31,7 +31,7 @@ defaultBtn1.addEventListener("change", function(){
             const result = reader.result;
             img1.src = result;
             wrapper1.classList.add("active");
-            // msg1.classList.remove('active');
+            msg1.classList.remove('active');
         }
 
 
@@ -65,7 +65,7 @@ defaultBtn2.addEventListener("change", function(){
             const result = reader.result;
             img2.src = result;
             wrapper2.classList.add("active");
-            // msg2.classList.remove('active');
+            msg2.classList.remove('active');
         }
 
 
