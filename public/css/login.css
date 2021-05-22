@@ -297,11 +297,12 @@ input[type="radio"]{
 .msg{
     color: red;
     text-align: center;
-    width: 60%;
+    width: 100%;
     margin: auto;
     font-family: 'Chivo', sans-serif;
     font-weight: bold;
-    height: 5px;
+    height: 15px;
+    /* visibility: hidden; */
 }
   
 

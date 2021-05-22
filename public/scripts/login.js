@@ -31,7 +31,7 @@ loginBtn.onclick = (() => {
 // HIDE MESSAGE BLOCK AFTER 5 SECS ----------------------------------------------------------------------------
 window.onload = () => {
     setTimeout(() => {
-        message.style.display = 'none';
+        message.style.visibility = 'hidden';
     }, 10000);
 }
 

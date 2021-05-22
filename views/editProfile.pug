@@ -73,8 +73,8 @@ html(lang="en")
                                         i.fas.fas.fa-times
                                     div.file-name#fileName1
                                 input(type="file" name="profilePhoto" hidden required)#default-btn1.input1
-                                p Profile Photo
-                                p(onclick ="defaultBtnActive1()")#custom-btn1 Choose a File 
+                                p.required Profile Photo
+                                p(onclick ="defaultBtnActive1()")#custom-btn1 Choose a File
                         
                         div.aadharCardImage
                             div.yourPhoto
@@ -93,35 +93,36 @@ html(lang="en")
                                         i.fas.fas.fa-times
                                     div.file-name#fileName2
                                 input(type="file" name ="aadharCardImage" hidden required)#default-btn2.input2
-                                p Aadhar Card Image
+                                p.required Aadhar Card Image
                                 p(onclick ="defaultBtnActive2()")#custom-btn2 Choose a File
 
                     p OTHER INFORMATION
                     hr
 
-                    div.otherInfo
-                        div.sec1
-                            p Gender :
-                            div
-                                input(type = "radio" name="gender" value="Male" required)
+                    div.gender.otherInfo.display
+                        p.title.required Gender :
+                            div.radio-sec
+                                input(type = "radio" name="gender" value="Male" required).radio
                                 | Male
 
-                            div   
-                                input(type = "radio" name="gender" value="Female")
+                                
+                                input(type = "radio" name="gender" value="Female").radio
                                 |  Female
 
-                            div    
-                                input(type = "radio" name="gender" value="Others")
-                                | Others
+                                    
+                                input(type = "radio" name="gender" value="Others").radio
+                                | Others 
                                 
-                    
-                        div.sec2
-                            p D.O.B :
-                            input(type="date", name="dob" required)#dob
+                        
 
-                        div.religion
-                            p Religion :
-                            select(name='religion' required).input
+
+                    div.sec2.display
+                            p.title.required D.O.B :
+                            input(type="date", name="dob" required)#dob.value.pointer
+
+                    div.religion.display
+                            p.title.required Religion :
+                            select(name='religion' required).input.value.pointer.religion-input
                                 option(disabled selected value) --Select a Religion--
                                 option(value="Hindu") Hindu
                                 option(value="Muslim") Muslim
@@ -129,46 +130,48 @@ html(lang="en")
                                 option(value="Christian") Christians
                                 option(value="Others") Others
 
-                        div.sec1
-                            p Cast :
-                            div
-                                input(type = "radio" name="cast" value="SC" required)
+                    div.cast.display
+                        p.title.required Cast :
+                            div.radio-sec
+                                input(type = "radio" name="cast" value="SC" required).radio
                                 | SC
 
-                            div   
-                                input(type = "radio" name="cast" value="ST")
+                               
+                                input(type = "radio" name="cast" value="ST").radio
                                 |  ST
 
-                            div    
-                                input(type = "radio" name="cast" value="OBC")
+                                
+                                input(type = "radio" name="cast" value="OBC").radio
                                 | OBC
 
-                            div    
-                                input(type = "radio" name="cast" value="General")
+                               
+                                input(type = "radio" name="cast" value="General").radio
                                 | GEN   
 
-                        div.phone
-                            p Phone Number :
-                            input(type="number", name="phoneNo" placeholder="10 digits Phone Number" required)
+                    div.phone.display
+                        p.title.required Phone Number :
+                        input(type="number", name="phoneNo" placeholder="10 digits Phone Number" required).value
 
-                        div.aadharNo
-                            p Aadhar Number :
-                            input(type="number", name="aadharNo" placeholder="12 digits Aadhar Number" required)
-
+                    div.aadharNo.display
+                        p.title.required Aadhar Number :
+                        input(type="number", name="aadharNo" placeholder="12 digits Aadhar Number" required).value
+                
+                    
+                        
 
                     p ADDRESS DETAILS
                     hr
 
-                    div.address
-                        p Address : 
+                    div.address.display
+                        p.title.required Address : 
                         div.addresslines
-                            input(type="text" name="addLine1" placeholder="Address Line 1" required)
-                            input(type="text" name="addLine2" placeholder="Address Line 2" required)
-                            input(type="text" name="addLine3" placeholder="Address Line 3" required)
+                            input(type="text" name="addLine1" placeholder="Address Line 1" required).value
+                            input(type="text" name="addLine2" placeholder="Address Line 2" required).value
+                            input(type="text" name="addLine3" placeholder="Address Line 3" required).value
 
-                    div.pincode
-                        p Pincode : 
-                        input(type="number" name="pincode" placeholder="Pincode" required)
+                    div.pincode.display
+                        p.title.required Pincode : 
+                        input(type="number" name="pincode" placeholder="Pincode" required).value
 
 
                     p DECLARATION

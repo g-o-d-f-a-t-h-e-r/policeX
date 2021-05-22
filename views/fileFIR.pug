@@ -14,6 +14,7 @@ html(lang="en")
         <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;500&display=swap" rel="stylesheet">
         <link rel="shortcut icon" type="image/x-icon" href="../public/img/logo.png" />
         link(rel="stylesheet", href="../public/css/fileFIR.css")
+        script(src="https://kit.fontawesome.com/a076d05399.js") 
         title File FIR 
     body 
         header#nav-area
@@ -36,3 +37,204 @@ html(lang="en")
 
             div.welcome
                 p Welcome, #[span(style = "color: rgb(1, 75, 97); text-transform : uppercase; text-shadow: 0px 0 1px #000") #{fName} !]
+
+            div.backButton  
+                a(href="/myProfile") Back 
+            
+            div.form-container
+
+                form(action="/fileFIR", method="post" enctype = "multipart/form-data" onsubmit= "openModal()")
+                    
+                    div.note
+                        p NOTE : Only a single FIR can be filed having same 'Complaint Type', any other attempt to file FIR with same 'Complaint Type' will overwrite the previous one.
+
+                    div.head
+                        p PERSONAL DETAILS
+                        hr
+
+                    div.firstName.form-body
+                        p.title First Name :
+                        p.value #{fName}
+                    
+                    div.lastName.form-body
+                        p.title Last Name :
+                        p.value #{lName}
+                    
+                    div.parentName.form-body
+                        p.title.required Parent/Guardian Full Name :
+                        input(type="text" name="parentName" placeholder="Eg: John Doe" required)
+                    
+                    div.phoneNo.form-body
+                        p.title.required Active Phone Number :
+                        input(type="number" name="phoneNo" placeholder="10 digits Phone Number" required)
+                    
+                    div.head
+                        p SUSPECT / ALLEGED DETAILS
+                        hr
+
+                    div.complaintAgainst.form-body
+                        p.title.required Complaint Against :
+                        select(name="complaintAgainst" required).input 
+                            option(disabled selected value) -------Complaint Against-------
+                            option(value="Against Public") Against Public
+                            option(value="Against Organization / Department") Against Organization / Department
+                            option(value="Against Police") Against Police
+                            option(value="Against Public Servant") Against Public Servant
+                            option(value="Both Police and Public") Both Police and Public
+                            option(value="Both Police and Organization") Both Police and Organization
+                            option(value="Politician") Politician 
+                            option(value="Not Known") Not Known
+
+                    div.allegedDetails.form-body
+                        p.title.required Do you know any details about alleged body? :
+                        input(type = "radio" name="allegedDetails" onclick ="display('yes')" value="Yes" required)
+                        p Yes
+
+                        input(type = "radio" name="allegedDetails" onclick="display('no')" value="No")
+                        p No
+                    
+                    div.allegedPhoto.form-body.yes
+                        p.title Photo of alleged body if any? :
+
+                        div.container
+                            div(onclick="defaultBtnActive()").wrapper
+                                div.image
+                                    img(src="")#img
+                                div.content
+                                    div.icon
+                                        i.fas.fa-cloud-upload-alt
+                                    div.text Upload Alleged Photo
+                                    div#cancel-btn
+                                        i.fas.fas.fa-times
+                                    div.file-name#fileName
+                                        p
+
+                            input(type="file", name="allegedPhoto")#default-btn 
+                                  
+                            
+                    div.allegedfName.form-body.yes
+                        p.title Alleged First Name :
+                        input(type="text" name="allegedfName" placeholder="Alleged First Name")
+                    
+                    div.allegedlName.form-body.yes
+                        p.title Alleged Last Name :
+                        input(type="text" name="allegedlName" placeholder="Alleged Last Name")
+
+                    div.allegedRelation.form-body.yes
+                        p.title Relation with Alleged Body :
+                        select(name="allegedRelation" ).input 
+                            option(disabled selected value) --Relation with Alleged body--
+                            option(value="Father") Father
+                            option(value="Mother") Mother
+                            option(value="Sister") Sister
+                            option(value="Brother") Brother
+                            option(value="Son") Son
+                            option(value="Daughter") Daughter
+                            option(value="Wife") Wife
+                            option(value="Husband") Husband
+                            option(value="Family Relationship") Family Relationship
+                            option(value="Unknown" selected) Unknown
+                    
+                    div.allegedGender.form-body.yes
+                        p.title Alleged Gender : 
+                        input(type = "radio" name="allegedGender" value="Male")
+                        p Male
+
+                        input(type = "radio" name="allegedGender" value="Female")
+                        p Female
+
+                        input(type = "radio" name="allegedGender" value="Others")
+                        p Others 
+
+                    div.head
+                        p COMPLAINT DETAILS
+                        hr
+
+                    div.dateOfIncidentFrom.form-body
+                        p.title.required Date of Incident - From :
+                        input(type="date" name="dateOfIncidentFrom" required)
+                    
+                    div.dateOfIncidentTo.form-body
+                        p.title.required Date of Incident - To :
+                        input(type="date" name="dateOfIncidentTo" required)
+                    
+                    div.placeOfIncident.form-body
+                        p.title.required Place of Incident :
+                        input(type="text" name="placeOfIncident" placeholder="Place of Incident" required)
+
+                    div.typeOfComplaint.form-body
+                        p.title.required Type of Complaint :
+                        select(name="typeOfComplaint" required).input
+                            option(disabled selected value) ------Type of Complaint------
+                            option(value="Abuse of Power") Abuse of Power
+                            option(value="Administrative Misdemeanor") Administrative Misdemeanor
+                            option(value="Car Parking Dispute") Car Parking Dispute
+                            option(value="Cheating") Cheating
+                            option(value="Complaint related to Women") Complaint related to Women
+                            option(value="Corruption") Corruption 
+                            option(value="Dacoity") Dacoity
+                            option(value="Drugs or Narcotics") Drugs or Narcotics
+                            option(value="Gambling") Gambling
+                            option(value="Human Right Violation") Human Right Violation
+                            option(value="Immoral Trafficking") Immoral Trafficking
+                            option(value="Kidnapping or Abduction") Kidnapping or Abduction
+                            option(value="Landlord - Tenant Dispute") Landlord - Tenant Dispute
+                            option(value="Miscellaneous") Miscellaneous 
+                            option(value="Neighbour Quarrel") Neighbour Quarrel
+                            option(value="Physical Violence") Physical Violence
+                            option(value="Property Dispute") Property Dispute
+                            option(value="Quarrel Regarding Water Supply") Quarrel Regarding Water Supply
+                            option(value="Robbery") Robbery
+                            option(value="Snatching") Snatching
+                            option(value="Theft / Burglary") Theft / Burglary
+                            option(value="Threatening") Threatening 
+                            option(value="Traffic Related Complaints") Traffic Related Complaints
+                            option(value="Violation of Arms Act") Violation of Arms Act 
+                            option(value="Violation of Court Orders") Violation of Court Orders
+                            option(value="Violation of License Condition") Violation of License Condition 
+                            option(value="Others / Not known") Others / Not known 
+
+                    div.complaintDescription.form-body
+                        p.title.required Complaint Description :
+                        textarea(name="complaintDescription", cols="45", rows="10" placeholder="Write a Description about your Complaint..." required)
+                    
+                    div.totalAmountInvolved.form-body
+                        p.title Total Amount / Money involved :
+                        input(type="number" name="totalMoneyInvolved" placeholder="Total money Involved" style="color : grey")
+                    
+                    div.noOfVictims.form-body
+                        p.title.required No of Victims :
+                        input(type="number" name="noOfVictims" placeholder="No of Victims" required)
+                    
+                    div.objectInvolved.form-body
+                        p.title Object or a thing involved :
+                        input(type="text", name="objectInvolved" placeholder="Eg : Knife / Gun etc.")
+                    
+                    div.nearestPoliceStation.form-body
+                        p.title.required Nearest Police Station from the Incident place :
+                        input(type="text", name="nearestPoliceStation" placeholder="Eg : Ghatkopar Police Station" required)
+                    
+                    p DECLARATION
+                    hr
+
+                    div.undertaking
+                        p I hereby declare that the details furnished above are true and correct to the best of my knowledge and belief and I undertake the responsibility to inform about any changes therein, immediately.
+                        div.agree
+                            input(type="checkbox", name="status" value = 0 required)
+                            label(for="status") I agree to the above Terms & Conditions
+                    
+                    div.submit
+                        input(type="submit", value="Submit")
+
+                    div.modal#modal
+                        div.modal-body
+                            img(src="../public/img/loader.gif", alt="", srcset="")
+                            p Filing FIR ! Please Wait ...
+                    
+                    div#overlay
+    
+    
+    
+    
+    
+        script(src="../public/scripts/fileFIR.js") 

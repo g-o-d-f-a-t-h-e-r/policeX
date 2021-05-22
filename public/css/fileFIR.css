@@ -6,6 +6,7 @@
 
 html{
     background-color: rgb(233, 233, 233);
+    scroll-behavior: smooth;
 }
 
 /* width */
@@ -43,7 +44,7 @@ html{
     background: rgb(95, 95, 95);
     position : sticky;
     top: 0;
-    z-index: 1;
+    z-index: 2;
 
 }
 
@@ -150,3 +151,362 @@ html{
     font-family: 'Chivo', sans-serif;
     user-select: none;
 }
+
+
+
+.backButton{
+    text-align: center;
+    margin-top: 30px;
+}
+
+.backButton a{
+    text-decoration: none;
+    font-family: 'Chivo', sans-serif;
+    font-weight: bold;
+    text-shadow: 0 0 1px #000;
+    font-size: 1.3rem;
+    color: black;
+    background-color:rgb(110, 226, 255);
+    padding: 10px 30px;
+    cursor: pointer;
+    transition-duration: 0.2s;
+    border-radius: 100px;
+    border: none;
+    outline: none;
+}
+
+.backButton a:hover{
+    background-color:rgb(59, 213, 252);
+}
+
+
+.form-container{
+    padding: 60px;
+    font-size: 1.3rem;
+    font-family: 'Chivo', sans-serif;
+    text-shadow: 0 0 1px #000;
+    color: rgb(0, 42, 61);
+}
+
+.note{
+    color: red;
+    text-align: center;
+}
+
+.head{
+    margin: 40px 0;
+}
+
+.form-body{
+    padding: 30px 60px;
+    margin-left: 10%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 70%;
+}
+
+.title{
+    margin : 0 10px;
+    font-family: 'Eczar', serif;
+    font-size: 1.4rem;
+}
+
+.value{
+    margin : 0 10px;
+    font-family: 'Chivo', sans-serif;
+    font-size: 1.3rem;
+    background-color: #fff;
+    border-radius: 100px;
+    width: 350px;
+    height: 45px;
+    color: rgb(66, 66, 66);
+    user-select: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+form input{
+    margin : 0 10px;
+    font-family: 'Chivo', sans-serif;
+    font-size: 1.3rem;
+    background-color: #fff;
+    border-radius: 100px;
+    width: 310px;
+    height: 45px;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    outline: none;
+    text-align: center;
+    padding : 0 20px;
+}
+
+.phoneNo input::-webkit-outer-spin-button,
+.phoneNo input::-webkit-inner-spin-button{
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.input{
+    margin : 0 10px;
+    font-family: 'Chivo', sans-serif;
+    font-size: 1.3rem;
+    background-color: #fff;
+    border-radius: 100px;
+    width: 350px;
+    height: 45px;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    outline: none;
+    text-align: center;
+    padding : 0 20px;
+    cursor: pointer;
+}
+
+input[type = radio]{
+    width: 20px;
+    cursor: pointer;
+}
+
+.yes{
+    /* transform: scale(0); */
+    display: none;
+    /* display: flex; */
+}
+
+.yes.active{
+    /* transform: scale(1); */
+    display: flex;
+}
+
+/* .container{
+    position: relative;
+} */
+
+.wrapper{
+    position: relative;
+    border: 2px dashed grey;
+    margin-left: 10px;
+    width: 340px;
+    height: 420px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition-duration: 0.3s;
+}
+
+.wrapper:hover{
+    background-color: rgb(180, 180, 180);
+    box-shadow: 0px 0px 10px black;
+}
+
+#img{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    border-radius: 10px;
+}
+
+
+.content{
+    height: 400px;
+    /* background-color: blue; */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    user-select: none;
+}
+
+.content .icon{
+    font-size: 5rem;
+}
+
+.content .text{
+    font-size: 1.4rem;
+    font-family: 'Ezar', serif;
+}
+
+.file-name{
+    position: absolute;
+    bottom: 0;
+    background-color: rgb(110, 226, 255);
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 40px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    visibility: hidden;
+    overflow : hidden;
+}
+
+#cancel-btn{
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    cursor: pointer;
+    display: none;
+    z-index: 1;
+    display: none;
+}
+
+#cancel-btn.active{
+    display: block;
+}
+
+#cancel-btn:hover{
+    color: red;
+}
+
+.container input{
+    height: 0;
+}
+
+#custom-btn{
+    background-color: rgb(48, 240, 253);
+    width: 340px;
+    margin: 10px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 100px;
+    cursor: pointer;
+    transition-duration: 0.3s;
+    margin-top: 30px;
+
+}
+
+#custom-btn:hover{
+    background-color: rgb(44, 215, 228);
+}
+
+
+
+.dateOfIncidentFrom input , .dateOfIncidentTo input{
+    cursor: pointer;
+}
+
+.complaintDescription textarea{
+    border-radius: 10px;
+    padding: 20px;
+    outline: none;
+    font-size: 1.1rem;
+    border: none;
+}
+
+.totalAmountInvolved input::-webkit-outer-spin-button,
+.totalAmountInvolved input::-webkit-inner-spin-button,
+.noOfVictims input::-webkit-outer-spin-button,
+.noOfVictims input::-webkit-inner-spin-button{
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.undertaking{
+    margin: 60px;
+}
+
+.agree{
+    display: flex;
+    align-items: center;
+    /* justify-content: start; */
+    margin-top: 40px;
+}
+
+.agree input{
+    width: 22px;
+    cursor: pointer;
+    margin-left: 0;
+    margin-right: 40px;
+}
+
+.submit{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.submit input{
+    cursor: pointer;
+    background-color:rgb(110, 226, 255);
+    transition-duration: 0.3s;
+    font-size: 1.3rem;
+    font-family: 'Chivo', sans-serif;
+    font-weight: bold;
+    text-shadow: 0 0 1px #000;
+    font-size: 1.2rem;
+}
+
+.submit input:hover{
+    background-color:rgb(59, 213, 252);
+}
+
+.required::after{
+    content: "*";
+    color: red;
+    font-size: 1.5rem;
+    margin-left: 10px;
+}
+
+
+
+/* MODAL CSS-------------------------------------- */
+
+.modal{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position : fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    transition: 200ms ease-in-out;
+    border: 1px solid black;
+    border-radius: 10px;
+    z-index: 3;
+    background-color: #fff;
+    width: 400px;
+    height: 150px;
+    text-align: center;
+    user-select: none;
+}
+
+.modal.active{
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.modal img{
+    width: 50px;
+}
+
+#overlay{
+    position: fixed;
+    opacity: 0;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0,0,0,0.7);
+    z-index: 1;
+    pointer-events: none;
+    transition: 200ms ease-in-out;
+}
+
+#overlay.active{
+    pointer-events: all;
+    opacity : 1;
+}
+
+
+
+
+
+
+

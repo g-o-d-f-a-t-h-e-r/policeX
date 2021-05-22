@@ -65,7 +65,7 @@ defaultBtn2.addEventListener("change", function(){
             const result = reader.result;
             img2.src = result;
             wrapper2.classList.add("active");
-            msg2.classList.remove('active');
+            msg2.classList.remove('active');        
         }
 
 
@@ -111,7 +111,7 @@ submit.addEventListener('click', (event) => {
         setTimeout(() => {
             modal2.classList.remove('active')
             overlay.classList.remove('active')
-        }, 3000);
+        }, 2000);
     }
     if(input2.value.length === 0){
         msg2.classList.add('active');
@@ -121,7 +121,7 @@ submit.addEventListener('click', (event) => {
         setTimeout(() => {
             modal2.classList.remove('active')
             overlay.classList.remove('active')
-        }, 3000);
+        }, 2000);
     }
 })
 

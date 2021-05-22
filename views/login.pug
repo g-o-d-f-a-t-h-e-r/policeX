@@ -45,6 +45,9 @@ html(lang="en")
                     if error == 'regErr'
                         div.msg#msg
                             p Email ID already exists !
+                    if error == 'passNotMatch'
+                        div.msg#msg
+                            p Can't register, Password and Confirm Password should be same.
 
                     div.form-container
                         div.slide-controls

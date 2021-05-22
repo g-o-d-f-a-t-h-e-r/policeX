@@ -1,0 +1,162 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(http-equiv="X-UA-Compatible", content="IE=edge")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Chivo:wght@300&family=Eczar&display=swap" rel="stylesheet"> 
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;700&display=swap" rel="stylesheet">
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;500&display=swap" rel="stylesheet">
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;500&display=swap" rel="stylesheet">
+        <link rel="shortcut icon" type="image/x-icon" href="../public/img/logo.png" />
+        link(rel="stylesheet", href="../public/css/viewFIR.css")
+        script(src="https://kit.fontawesome.com/a076d05399.js") 
+        title  Your FIR 
+    body 
+        header#nav-area
+        div#navbar
+            a(href="http://policex.herokuapp.com").logo 
+                div#logo
+                    img(src="../public/img/logo.png", alt="", srcset="")
+                    h1 #[span P]olice - X
+            ul
+                li #[a(href='/dashboard') Dashboard]
+                //- li #[a(href="http://") About Us]
+                li #[a(href="#news") News]
+                li #[a(href="http://") Services] 
+                form(action="/logout", method="post") 
+                    button#btn Logout
+
+        div#content
+            div.userDashboard
+                h1 Your Fir
+
+            div.welcome
+                p Welcome, #[span(style = "color: rgb(1, 75, 97); text-transform : uppercase; text-shadow: 0px 0 1px #000") #{fName} !]
+
+
+            
+            div.card
+                div.firNo
+                    p.firno FIR Number : 
+                    p.firValue #{firNo}
+                p.head PERSONAL DETAILS 
+                hr
+                div.fName.display
+                    p.title First Name : 
+                    p.value #{fName}
+
+                div.lName.display
+                    p.title Last Name : 
+                    p.value #{lName}
+
+                div.parentName.display
+                    p.title Parent Name : 
+                    p.value #{parentName}
+                
+                div.phoneNo.display
+                    p.title Phone Number : 
+                    p.value #{phoneNo}
+                
+                div.complaintAgainst.display
+                    p.title Complaint Against : 
+                    p.value #{complaintAgainst}
+                
+
+                p.head ALLEGED DETAILS 
+                hr
+
+
+                div.isKnown.display
+                    p.title Is details of the alleged is known? : 
+                    p.value #{isKnown}
+                
+                if isKnown === 'Yes'
+                    div.allegedPhoto.display
+                        p.title Alleged Photo : 
+                        if allegedPhoto === 'NA'
+                            img(src="https://img.icons8.com/fluent/100/000000/gender-neutral-user.png", alt="Alleged Image", id="img")
+                        else
+                            img(src="/firImages/:filename", alt="Alleged Photo", id="img")
+                    
+                    div.allegedfName.display
+                        p.title Alleged First Name :
+                        if allegedfName.length === 0
+                            p.value NA 
+                        else 
+                            p.value #{allegedfName}
+                    
+                    div.allegedlName.display
+                        p.title Alleged Last Name : 
+                        if allegedlName.length === 0
+                            p.value NA 
+                        else 
+                            p.value #{allegedlName}
+                    
+                    div.allegedRelation.display
+                        p.title Your relation with alleged body : 
+                        if relationWithAlleged.length === 0
+                            p.value NA 
+                        else 
+                            p.value #{relationWithAlleged}
+                    
+                    div.allegedGender.display
+                        p.title Gender of alleged body : 
+                        if allegedGender.length === 0
+                            p.value NA 
+                        else 
+                            p.value #{allegedGender}
+
+                p.head Complaint details 
+                hr
+
+                div.dateOfIncidentFrom.display
+                    p.title Date of Incident From : 
+                    p.value #{dateOfIncidentFrom}
+                
+                
+                div.dateOfIncidentTo.display
+                    p.title Date of Incident To : 
+                    p.value #{dateOfIncidentTo}
+
+                div.placeOfIncident.display
+                    p.title Place of Incident : 
+                    p.value #{placeOfIncident}
+                
+                div.typeOfComplaint.display
+                    p.title Type of Complaint :
+                    p.value #{typeOfComplaint}
+                
+                div.complaintDescription.display
+                    p.title Complaint Description : 
+                    p.description #{complaintDescription}
+                
+                div.totalMoneyInvolved.display
+                    p.title Total Money Involved : 
+                    if totalMoneyInvolved.length === 0
+                        p.value NA 
+                    else
+                        p.value #{totalMoneyInvolved}
+                
+                div.noOfVictims.display
+                    p.title Number of Victims 
+                    p.value #{noOfVictims}
+                
+                div.objectInvolved.display
+                    p.title Object Involved :
+                    p.value #{objectInvolved}
+                
+                div.nearestPoliceStation.display
+                    p.title Nearest Police Station from incident place : 
+                    p.value #{nearestPoliceStation}
+
+                p.head Declaration
+                hr
+
+                div.undertaking
+                    p I hereby declare that the details furnished above are true and correct to the best of my knowledge and belief and I undertake the responsibility to inform about any changes therein, immediately.
+                        
