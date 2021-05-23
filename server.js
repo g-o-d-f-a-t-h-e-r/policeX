@@ -15,8 +15,7 @@ const methodOverride = require('method-override');
 const moment = require('moment');
 const { ReadStream } = require('fs');
 const userFIR = require('./model/userFirs');
-const userFirs = require('./model/userFirs');
-const user = require('./model/user');
+const infoAboutMishap = require('./model/inform');
 
 
 
@@ -163,8 +162,6 @@ app.get('/login', redirectHome, (req, res) => {
 
 
 
-
-
 // ----------------------------------------- LOGIN ------------------------------------------------------------
 app.post('/api/login', (req, res)=> {
 
@@ -207,10 +204,6 @@ app.post('/api/login', (req, res)=> {
 })
 
 // -------------------------------------------------------------------------------------------------------------
-
-
-
-
 
 
 
@@ -302,7 +295,7 @@ app.get('/dashboard', redirectLogin, (req, res) => {
 
 // -------------------------------------------------------------------------------------------------------------
 
-// Middleware forGetting profilePhoto from the GFS Chunks ---------------------
+// Middleware forGetting profilePhoto from the GFS Chunks 
 app.get('/profilePhoto/:filename', redirectLogin,  (req,res) => {
 
     userProfile.findOne({
@@ -333,7 +326,7 @@ app.get('/profilePhoto/:filename', redirectLogin,  (req,res) => {
      
 })
 
-// Middleware for Getting profilePhoto from the GFS Chunks ---------------------
+// Middleware for Getting profilePhoto from the GFS Chunks 
 app.get('/aadharCardImage/:filename', redirectLogin, (req,res) => {
 
     const user = userProfile.findOne({
@@ -366,7 +359,7 @@ app.get('/aadharCardImage/:filename', redirectLogin, (req,res) => {
 })
 
 
-// Middleware for Getting FIR IMAGES from the GFS Chunks ---------------------
+// Middleware for Getting FIR IMAGES from the GFS Chunks -
 app.get('/firImages/', redirectLogin, (req,res) => {
 
     const allegedPhoto = req.param('filename')
@@ -391,6 +384,7 @@ app.get('/firImages/', redirectLogin, (req,res) => {
     })
      
 })
+// --------------------------------------------------------------------------------------------------------------
 
 
 
@@ -450,6 +444,8 @@ app.get('/myProfile', redirectLogin, (req, res) => {
     })
       
 })
+
+// --------------------------------------------------------------------------------------------------------------
 
 
 
@@ -544,6 +540,8 @@ app.post('/editProfile', upload.fields([{ name : 'profilePhoto', maxCount : 1 },
 
 })
 
+// ----------------------------------------------------------------------------------------------------------------
+
 
 
 
@@ -590,8 +588,6 @@ app.post('/fileFIR', upload.fields([{ name : 'allegedPhoto', maxCount : 1 }]), (
         firImage = req.files['allegedPhoto'][0].filename;
         console.log(req.files['allegedPhoto'][0]);
     }
-    // const firImage = 'NA'
-
 
     const emailAdd = req.session.emailAdd
     const lName = req.session.lName
@@ -685,80 +681,7 @@ app.post('/fileFIR', upload.fields([{ name : 'allegedPhoto', maxCount : 1 }]), (
                 lName : req.session.lName,
                 msg : `Note : You cannot file another FIR with same 'Complaint Type'...`
             })
-            // let query = {
-            //     emailAdd : req.session.emailAdd,
-            //     typeOfComplaint : typeOfComplaint
-            // }
-            // let newValues = {$set: {
-            //     dateOfComplaint : new Date(),
-            //     parentName : parentName,
-            //     phoneNo : phoneNo,
-            //     complaintAgainst : complaintAgainst,
-            //     isKnown : allegedDetails,
-            //     allegedPhoto : firImage,
-            //     allegedfName : allegedfName,
-            //     allegedlName : allegedlName,
-            //     relationWithAlleged : allegedRelation,
-            //     allegedGender : allegedGender,
-            //     dateOfIncidentFrom : dateOfIncidentFrom,
-            //     dateOfIncidentTo : dateOfIncidentTo,
-            //     placeOfIncident : placeOfIncident,
-            //     typeOfComplaint : typeOfComplaint,
-            //     complaintDescription : complaintDescription,
-            //     totalMoneyInvolved : totalMoneyInvolved,
-            //     noOfVictims : noOfVictims,
-            //     objectInvolved : objectInvolved,
-            //     nearestPoliceStation : nearestPoliceStation,
-            //     status : status,
-            // }}
-
-            // userFIR.updateOne(query, newValues, (err, response) => {
-            //     if(err){
-            //         console.log('Error updating the values : ', err)
-            //     }
-            //     console.log('Document Updated')
-
-            //     req.session.firNo = user.firNo;
-                
-            //     gfs.remove({filename : user.allegedPhoto, root : 'userProfileImgs'}, function (err) {
-            //         if (err){
-            //             console.log("Can't delete Profile Photo", err);
-            //         }
-            //         console.log('Old Alleged Image Photo deleted Successfully');
-            //     });
-                
-            //     // res.redirect('/myCases');
-            //     res.status(200).render('viewFIR.pug', {
-            //         emailAdd : emailAdd,
-            //         dateOfComplaint : user.dateOfComplaint,   
-            //         fName : fName,
-            //         lName : lName,
-            //         parentName : parentName,
-            //         phoneNo : phoneNo,
-            //         complaintAgainst : complaintAgainst,
-            //         isKnown : allegedDetails,
-            //         allegedPhoto : firImage,
-            //         allegedfName : allegedfName,
-            //         allegedlName : allegedlName,
-            //         relationWithAlleged : allegedRelation,
-            //         allegedGender : allegedGender,
-            //         dateOfIncidentFrom : dateOfIncidentFrom,
-            //         dateOfIncidentTo : dateOfIncidentTo,
-            //         placeOfIncident : placeOfIncident,
-            //         typeOfComplaint : typeOfComplaint,
-            //         complaintDescription : complaintDescription,
-            //         totalMoneyInvolved : totalMoneyInvolved,
-            //         noOfVictims : noOfVictims,
-            //         objectInvolved : objectInvolved,
-            //         nearestPoliceStation : nearestPoliceStation,
-            //         status : status,
-            //         firNo : user.firNo
-            //     })
-
-            // })
-            // .catch((error) => {
-            //     console.log("Unknown error occured while updating : ", error)
-            // })
+            
         }
 
     })
@@ -978,11 +901,68 @@ app.get('/deleteFIR', redirectLogin, (req, res) => {
 
 
 app.get('/inform', redirectLogin, (req, res) => {
-    res.status(200).render('ahed.pug')
+
+    userProfile.findOne({
+        emailAdd : req.session.emailAdd
+    })
+    .then((user) => {
+        if(user){
+            res.status(200).render('inform.pug',{
+                emailAdd : req.session.emailAdd,
+                fName : req.session.fName,
+                lName : req.session.lName
+            })
+        }else{
+            res.status(200).render('editProfile.pug', {
+                emailAdd : req.session.emailAdd,
+                fName : req.session.fName,
+                lName : req.session.lName,
+                msg : 'Complete your User Profile First !'
+            })
+        }
+
+    })
+    
+})
+
+app.post('/inform', (req, res) => {
+
+    const {informationAbout, dateOfMishap, placeOfMishap, city, description} = req.body;
+
+    const infoObj = {
+        emailAdd : req.session.emailAdd,
+        informationAbout : informationAbout,
+        dateOfMishap : dateOfMishap,
+        placeOfMishap : placeOfMishap,
+        city : city,
+        description : description
+    }
+
+    new infoAboutMishap(infoObj).save()
+    .then(() => {
+        console.log("Information Updated Successfully !")
+
+        res.status(200).render('confirmation.pug', {
+            emailAdd : req.session.emailAdd,
+            fName : req.session.fName,
+            lName : req.session.lName,
+            msg : `Mishappening`
+        })
+    })
+
 })
 
 app.get('/missingPerson', redirectLogin, (req, res) => {
     res.status(200).render('ahed.pug')
+})
+
+app.get('/confirmation', redirectLogin, (req, res) => {
+    res.status(200).render('confirmation.pug',{
+        emailAdd : req.session.emailAdd,
+        fName : req.session.fName,
+        lName : req.session.lName,
+        msg : ``
+    })
 })
 
 app.get('/accountSettings', redirectLogin, (req, res) => {
