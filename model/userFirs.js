@@ -67,12 +67,12 @@ const userSchema = schema({
     },
 
     dateOfIncidentFrom : {
-        type : Date,
+        type : 'String',
         
     },
 
     dateOfIncidentTo : {
-        type : Date,
+        type : 'String',
         
     },
 

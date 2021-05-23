@@ -37,3 +37,44 @@ html(lang="en")
 
             div.welcome
                 p Welcome, #[span(style = "color: rgb(1, 75, 97); text-transform : uppercase; text-shadow: 0px 0 1px #000") #{fName} !]
+
+            div.card
+                table.content-table
+                    thead 
+                        tr
+                            th FIR No 
+                            th Alleged Photo 
+                            th Complaint Against 
+                            th Complaint Type 
+                            th Status 
+                            th Action
+                    
+                    tbody 
+                        
+                        for user in users 
+                            tr.FIR 
+                            th #{user.firNo} 
+                            td  
+                                if user.allegedPhoto === 'NA'
+                                    img(src="https://img.icons8.com/fluent/100/000000/gender-neutral-user.png", alt="Alleged Image", id="img")
+                                else
+                                    img(src=`/firImages/?filename=${user.allegedPhoto}`, alt="Alleged Image", id="img")
+                            td #{user.complaintAgainst} 
+                            td #{user.typeOfComplaint} 
+                            td  
+                                if user.status == 0
+                                    p.status Pending 
+                                if user.status == 1
+                                    p.status In Progress 
+                                if user.status == 2
+                                    p.status Approved 
+                            td.action
+                                a(href=`/viewFIR/?firNo=${user.firNo}`).viewFIR View FIR
+                                a(href=`/editFIR/?firNo=${user.firNo}&filename=${user.allegedPhoto}`).editFIR Edit FIR 
+                                a(href=`/deleteFIR/?firNo=${user.firNo}&filename=${user.allegedPhoto}`).deleteFIR Delete FIR
+
+
+
+
+
+        script(src="../public/scripts/myCases.js")        

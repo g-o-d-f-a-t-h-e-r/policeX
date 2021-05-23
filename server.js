@@ -16,6 +16,7 @@ const moment = require('moment');
 const { ReadStream } = require('fs');
 const userFIR = require('./model/userFirs');
 const userFirs = require('./model/userFirs');
+const user = require('./model/user');
 
 
 
@@ -366,34 +367,27 @@ app.get('/aadharCardImage/:filename', redirectLogin, (req,res) => {
 
 
 // Middleware for Getting FIR IMAGES from the GFS Chunks ---------------------
-app.get('/firImages/:filename', redirectLogin, (req,res) => {
+app.get('/firImages/', redirectLogin, (req,res) => {
 
-    const user = userFIR.findOne({
-        emailAdd : req.session.emailAdd,
-        firNo : req.session.firNo
-    })
-    .then((user)=> {
-        
-        //Finding aadharCard Image
-        gfs.files.findOne({filename : user.allegedPhoto}, (err, file) => {
-            if(!file || file.length === 0){
-                return res.status(404).json({
-                    err : 'No file exists'
-                })
-            }
+    const allegedPhoto = req.param('filename')
+    console.log(allegedPhoto)
+    
+    //Finding allegedPhoto Image
+    gfs.files.findOne({filename : allegedPhoto}, (err, file) => {
+        if(!file || file.length === 0){
+            return res.status(404).json({
+                err : 'No file exists'
+            })
+        }
 
-            if(file.contentType === 'image/jpeg' || file.contentType === 'image/png'){
-                let allegedPhoto = gfs.createReadStream(file.filename);
-                allegedPhoto.pipe(res);
-            }else{
-                res.status(404).json({
-                    err : 'Not an Image'
-                })
-            }
-        })
-    })
-    .catch((error) => {
-        console.log("Something went wrong", error);
+        if(file.contentType === 'image/jpeg' || file.contentType === 'image/png'){
+            let allegedPhoto = gfs.createReadStream(file.filename);
+            allegedPhoto.pipe(res);
+        }else{
+            res.status(404).json({
+                err : 'Not an Image'
+            })
+        }
     })
      
 })
@@ -597,6 +591,8 @@ app.post('/fileFIR', upload.fields([{ name : 'allegedPhoto', maxCount : 1 }]), (
         console.log(req.files['allegedPhoto'][0]);
     }
     // const firImage = 'NA'
+
+
     const emailAdd = req.session.emailAdd
     const lName = req.session.lName
     const fName = req.session.fName
@@ -608,88 +604,13 @@ app.post('/fileFIR', upload.fields([{ name : 'allegedPhoto', maxCount : 1 }]), (
     .then((user) => {
 
         if(!user){
-            userFIR.countDocuments()
-            .then((mycount) => {
-                console.log('my count is : ', mycount)
+            let firNo = `PLX-${Math.floor(1000000000 + Math.random() * 9000000000)}`
 
-                let firNo = `PLX-${mycount+1}`
-
-                const userObj = {
-                    emailAdd : emailAdd,
-                    dateOfComplaint : new Date(),
-                    fName : fName,
-                    lName : lName,
-                    parentName : parentName,
-                    phoneNo : phoneNo,
-                    complaintAgainst : complaintAgainst,
-                    isKnown : allegedDetails,
-                    allegedPhoto : firImage,
-                    allegedfName : allegedfName,
-                    allegedlName : allegedlName,
-                    relationWithAlleged : allegedRelation,
-                    allegedGender : allegedGender,
-                    dateOfIncidentFrom : dateOfIncidentFrom,
-                    dateOfIncidentTo : dateOfIncidentTo,
-                    placeOfIncident : placeOfIncident,
-                    typeOfComplaint : typeOfComplaint,
-                    complaintDescription : complaintDescription,
-                    totalMoneyInvolved : totalMoneyInvolved,
-                    noOfVictims : noOfVictims,
-                    objectInvolved : objectInvolved,
-                    nearestPoliceStation : nearestPoliceStation,
-                    status : status,
-                    firNo : firNo
-                }
-
-                new userFIR(userObj).save()
-                .then(() => {
-                    console.log('FIR filled successfuly !')
-                    req.session.firNo = firNo;
-                    res.status(200).render('viewFIR.pug', {
-                        emailAdd : emailAdd,
-                        dateOfComplaint : new Date(),   
-                        fName : fName,
-                        lName : lName,
-                        parentName : parentName,
-                        phoneNo : phoneNo,
-                        complaintAgainst : complaintAgainst,
-                        isKnown : allegedDetails,
-                        allegedPhoto : firImage,
-                        allegedfName : allegedfName,
-                        allegedlName : allegedlName,
-                        relationWithAlleged : allegedRelation,
-                        allegedGender : allegedGender,
-                        dateOfIncidentFrom : dateOfIncidentFrom,
-                        dateOfIncidentTo : dateOfIncidentTo,
-                        placeOfIncident : placeOfIncident,
-                        typeOfComplaint : typeOfComplaint,
-                        complaintDescription : complaintDescription,
-                        totalMoneyInvolved : totalMoneyInvolved,
-                        noOfVictims : noOfVictims,
-                        objectInvolved : objectInvolved,
-                        nearestPoliceStation : nearestPoliceStation,
-                        status : status,
-                        firNo : firNo
-                    })
-                })
-                .catch((error) => {
-                    console.log('Error filing FIR ...', error)
-                })
-
-
-            })
-            .catch((err) => {
-                console.log('some error occured while counting docs : ', err)
-            })
-
-
-        }else{
-            let query = {
-                emailAdd : req.session.emailAdd,
-                typeOfComplaint : typeOfComplaint
-            }
-            let newValues = {$set: {
+            const userObj = {
+                emailAdd : emailAdd,
                 dateOfComplaint : new Date(),
+                fName : fName,
+                lName : lName,
                 parentName : parentName,
                 phoneNo : phoneNo,
                 complaintAgainst : complaintAgainst,
@@ -709,24 +630,13 @@ app.post('/fileFIR', upload.fields([{ name : 'allegedPhoto', maxCount : 1 }]), (
                 objectInvolved : objectInvolved,
                 nearestPoliceStation : nearestPoliceStation,
                 status : status,
-            }}
+                firNo : firNo
+            }
 
-            userFIR.updateOne(query, newValues, (err, response) => {
-                if(err){
-                    console.log('Error updating the values : ', err)
-                }
-                console.log('Document Updated')
-
-                req.session.firNo = user.firNo;
-                
-                gfs.remove({filename : user.allegedPhoto, root : 'userProfileImgs'}, function (err) {
-                    if (err){
-                        console.log("Can't delete Profile Photo", err);
-                    }
-                    console.log('Old Alleged Image Photo deleted Successfully');
-                });
-                
-                // res.redirect('/myCases');
+            new userFIR(userObj).save()
+            .then(() => {
+                console.log('FIR filled successfuly !')
+                req.session.firNo = firNo;
                 res.status(200).render('viewFIR.pug', {
                     emailAdd : emailAdd,
                     dateOfComplaint : new Date(),   
@@ -751,13 +661,104 @@ app.post('/fileFIR', upload.fields([{ name : 'allegedPhoto', maxCount : 1 }]), (
                     objectInvolved : objectInvolved,
                     nearestPoliceStation : nearestPoliceStation,
                     status : status,
-                    firNo : user.firNo
+                    firNo : firNo
                 })
-
             })
             .catch((error) => {
-                console.log("Unknown error occured while updating : ", error)
+                console.log('Error filing FIR ...', error)
             })
+
+
+
+        }else{
+
+            gfs.remove({filename : firImage, root : 'userProfileImgs'}, function (err) {
+                if (err){
+                    console.log("Can't delete Profile Photo", err);
+                }
+                console.log('Purposely not pushed the image...');
+            });
+
+            res.status(200).render('fileFIR.pug', {
+                emailAdd : req.session.emailAdd,
+                fName: req.session.fName,
+                lName : req.session.lName,
+                msg : `Note : You cannot file another FIR with same 'Complaint Type'...`
+            })
+            // let query = {
+            //     emailAdd : req.session.emailAdd,
+            //     typeOfComplaint : typeOfComplaint
+            // }
+            // let newValues = {$set: {
+            //     dateOfComplaint : new Date(),
+            //     parentName : parentName,
+            //     phoneNo : phoneNo,
+            //     complaintAgainst : complaintAgainst,
+            //     isKnown : allegedDetails,
+            //     allegedPhoto : firImage,
+            //     allegedfName : allegedfName,
+            //     allegedlName : allegedlName,
+            //     relationWithAlleged : allegedRelation,
+            //     allegedGender : allegedGender,
+            //     dateOfIncidentFrom : dateOfIncidentFrom,
+            //     dateOfIncidentTo : dateOfIncidentTo,
+            //     placeOfIncident : placeOfIncident,
+            //     typeOfComplaint : typeOfComplaint,
+            //     complaintDescription : complaintDescription,
+            //     totalMoneyInvolved : totalMoneyInvolved,
+            //     noOfVictims : noOfVictims,
+            //     objectInvolved : objectInvolved,
+            //     nearestPoliceStation : nearestPoliceStation,
+            //     status : status,
+            // }}
+
+            // userFIR.updateOne(query, newValues, (err, response) => {
+            //     if(err){
+            //         console.log('Error updating the values : ', err)
+            //     }
+            //     console.log('Document Updated')
+
+            //     req.session.firNo = user.firNo;
+                
+            //     gfs.remove({filename : user.allegedPhoto, root : 'userProfileImgs'}, function (err) {
+            //         if (err){
+            //             console.log("Can't delete Profile Photo", err);
+            //         }
+            //         console.log('Old Alleged Image Photo deleted Successfully');
+            //     });
+                
+            //     // res.redirect('/myCases');
+            //     res.status(200).render('viewFIR.pug', {
+            //         emailAdd : emailAdd,
+            //         dateOfComplaint : user.dateOfComplaint,   
+            //         fName : fName,
+            //         lName : lName,
+            //         parentName : parentName,
+            //         phoneNo : phoneNo,
+            //         complaintAgainst : complaintAgainst,
+            //         isKnown : allegedDetails,
+            //         allegedPhoto : firImage,
+            //         allegedfName : allegedfName,
+            //         allegedlName : allegedlName,
+            //         relationWithAlleged : allegedRelation,
+            //         allegedGender : allegedGender,
+            //         dateOfIncidentFrom : dateOfIncidentFrom,
+            //         dateOfIncidentTo : dateOfIncidentTo,
+            //         placeOfIncident : placeOfIncident,
+            //         typeOfComplaint : typeOfComplaint,
+            //         complaintDescription : complaintDescription,
+            //         totalMoneyInvolved : totalMoneyInvolved,
+            //         noOfVictims : noOfVictims,
+            //         objectInvolved : objectInvolved,
+            //         nearestPoliceStation : nearestPoliceStation,
+            //         status : status,
+            //         firNo : user.firNo
+            //     })
+
+            // })
+            // .catch((error) => {
+            //     console.log("Unknown error occured while updating : ", error)
+            // })
         }
 
     })
@@ -769,22 +770,212 @@ app.post('/fileFIR', upload.fields([{ name : 'allegedPhoto', maxCount : 1 }]), (
 
 // ----------------------------------------------------------------------------------------------------------
 
+
+app.get('/myCases', redirectLogin, async (req, res) => {
+
+    userFIR.find({
+        emailAdd : req.session.emailAdd,
+    })
+    .then((users) => {
+        console.log(users)
+        
+        res.status(200).render('myCases.pug', {
+            emailAdd : req.session.emailAdd,
+            fName : req.session.fName,
+            lName : req.session.lName,
+            users : users
+        
+        })
+    })
+    .catch((err) => {
+        console.log('Error finding the users', err)
+    })
+    
+
+})
+
+
+
+// ---------------------------------------------MY CASES ACTIONS -----------------------------------------------
 app.get('/viewFIR', redirectLogin, (req, res) => {
-    res.status(200).render('viewFIR.pug', {
-        emailAdd : req.session.emailAdd,
-        fName : req.session.fName,
-        lName : req.session.lName
+
+    const firNo = req.param('firNo')
+    console.log("this is FIR no : ", firNo)
+
+    userFIR.findOne({
+        firNo : firNo
+    })
+    .then((user) => {
+        res.status(200).render('viewFIR.pug', {
+            emailAdd : user.emailAdd,
+            dateOfComplaint : user.dateOfComplaint,   
+            fName : user.fName,
+            lName : user.lName,
+            parentName : user.parentName,
+            phoneNo : user.phoneNo,
+            complaintAgainst : user.complaintAgainst,
+            isKnown : user.isKnown,
+            allegedPhoto : user.allegedPhoto,
+            allegedfName : user.allegedfName,
+            allegedlName : user.allegedlName,
+            relationWithAlleged : user.allegedRelation,
+            allegedGender : user.allegedGender,
+            dateOfIncidentFrom : user.dateOfIncidentFrom,
+            dateOfIncidentTo : user.dateOfIncidentTo,
+            placeOfIncident : user.placeOfIncident,
+            typeOfComplaint : user.typeOfComplaint,
+            complaintDescription : user.complaintDescription,
+            totalMoneyInvolved : user.totalMoneyInvolved,
+            noOfVictims : user.noOfVictims,
+            objectInvolved : user.objectInvolved,
+            nearestPoliceStation : user.nearestPoliceStation,
+            status : user.status,
+            firNo : user.firNo
+        })
+
+        console.log(user.allegedPhoto)
     })
 })
 
 
-app.get('/myCases', redirectLogin, (req, res) => {
-    res.status(200).render('myCases.pug', {
+app.get('/editFIR', redirectLogin, (req, res) => {
+    const firNo = req.param('firNo');
+    const oldAllegedPhoto = req.param('filename')
+
+    res.status(200).render('editFIR.pug', {
         emailAdd : req.session.emailAdd,
         fName : req.session.fName,
-        lName : req.session.lName
+        lName : req.session.lName,
+        firNo : firNo,
+        oldAllegedPhoto : oldAllegedPhoto
     })
+
 })
+
+app.post('/editFIR', upload.fields([{ name : 'allegedPhoto', maxCount : 1 }]), (req, res) => {
+    const firNo = req.param('firNo')
+    const oldAllegedPhoto = req.param('oldAllegedPhoto')
+    console.log(firNo);
+    const emailAdd = req.session.emailAdd;
+    const { parentName, phoneNo, complaintAgainst, allegedDetails, allegedfName, allegedlName, allegedRelation, allegedGender, dateOfIncidentFrom, dateOfIncidentTo, placeOfIncident, typeOfComplaint, complaintDescription, totalMoneyInvolved, noOfVictims, objectInvolved, nearestPoliceStation, status } = req.body;
+    let firImage = `NA`;
+    console.log(req.files)
+    if(req.files['allegedPhoto'] != null){
+        firImage = req.files['allegedPhoto'][0].filename;
+        console.log(req.files['allegedPhoto'][0]);
+    }
+
+    let query = {
+        firNo : firNo
+    }
+
+    let newValues = {$set: {
+        dateOfComplaint : new Date(),
+        parentName : parentName,
+        phoneNo : phoneNo,
+        complaintAgainst : complaintAgainst,
+        isKnown : allegedDetails,
+        allegedPhoto : firImage,
+        allegedfName : allegedfName,
+        allegedlName : allegedlName,
+        relationWithAlleged : allegedRelation,
+        allegedGender : allegedGender,
+        dateOfIncidentFrom : dateOfIncidentFrom,
+        dateOfIncidentTo : dateOfIncidentTo,
+        placeOfIncident : placeOfIncident,
+        typeOfComplaint : typeOfComplaint,
+        complaintDescription : complaintDescription,
+        totalMoneyInvolved : totalMoneyInvolved,
+        noOfVictims : noOfVictims,
+        objectInvolved : objectInvolved,
+        nearestPoliceStation : nearestPoliceStation,
+        status : status,
+    }}
+
+    userFIR.updateOne(query, newValues, (err, response) => {
+        
+        if(err){
+            console.log('Error updating the values : ', err)
+        }
+        console.log('FIR Updated...')
+
+        
+        
+        gfs.remove({filename : oldAllegedPhoto, root : 'userProfileImgs'}, function (err) {
+            if (err){
+                console.log("Can't delete Profile Photo", err);
+            }
+            console.log('Old Alleged Image Photo deleted Successfully');
+        });
+
+    })
+
+    userFIR.findOne({
+        firNo : firNo
+    })
+    .then((user) => {
+        res.status(200).render('viewFIR.pug', {
+            emailAdd : user.emailAdd,
+            dateOfComplaint : user.dateOfComplaint,   
+            fName : user.fName,
+            lName : user.lName,
+            parentName : user.parentName,
+            phoneNo : user.phoneNo,
+            complaintAgainst : user.complaintAgainst,
+            isKnown : user.isKnown,
+            allegedPhoto : firImage,
+            allegedfName : user.allegedfName,
+            allegedlName : user.allegedlName,
+            relationWithAlleged : user.allegedRelation,
+            allegedGender : user.allegedGender,
+            dateOfIncidentFrom : user.dateOfIncidentFrom,
+            dateOfIncidentTo : user.dateOfIncidentTo,
+            placeOfIncident : user.placeOfIncident,
+            typeOfComplaint : user.typeOfComplaint,
+            complaintDescription : user.complaintDescription,
+            totalMoneyInvolved : user.totalMoneyInvolved,
+            noOfVictims : user.noOfVictims,
+            objectInvolved : user.objectInvolved,
+            nearestPoliceStation : user.nearestPoliceStation,
+            status : user.status,
+            firNo : user.firNo
+        })
+    })
+    .catch((err) => {
+        console.log('Error Finding FIR : ', err)
+    })
+    
+
+})
+
+
+app.get('/deleteFIR', redirectLogin, (req, res) => {
+    const firNo = req.param('firNo')
+    const allegedPhoto = req.param('filename')
+
+    const query = { firNo : firNo }
+
+    gfs.remove({filename : allegedPhoto, root : 'userProfileImgs'}, function (err) {
+        if (err){
+            console.log("Can't delete Profile Photo", err);
+        }
+        console.log('Old Alleged Image Photo deleted Successfully');
+    });
+
+    userFIR.deleteOne(query, (err, obj) => {
+        if(err){
+            console.log('Cant delete userFIR : ', err)
+        }else{
+            console.log('userFIR deleted successfully')
+        }
+
+    })
+
+    res.redirect('/myCases')
+
+})
+// ---------------------------------------------------------------------------------------------------------------
+
 
 app.get('/inform', redirectLogin, (req, res) => {
     res.status(200).render('ahed.pug')

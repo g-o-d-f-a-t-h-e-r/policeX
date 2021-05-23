@@ -151,3 +151,121 @@ html{
     font-family: 'Chivo', sans-serif;
     user-select: none;
 }
+
+.card{
+    padding: 50px;
+}
+
+.content-table{
+    border-collapse: collapse;
+    margin: 25px 0;
+    font-size: 1.2rem;
+    min-width: 400px;
+}
+
+.content-table thead tr{
+    background-color: black;
+    color: white;
+    font-weight: bold;
+
+}
+
+.content-table th,
+.content-table  td{
+     padding: 12px 15px;
+     width: 200px;
+     user-select: none;
+     text-align: center;
+}
+
+.content-table th{
+    font-family: 'Chivo', sans-serif;
+}
+
+.content-table td{
+    font-family: 'Eczar', serif;
+}
+
+.content-table tbody tr{
+    border-bottom: 1px solid rgb(196, 196, 196);
+}
+
+
+#img{
+    width: 100px;
+    height: 120px;
+    border: 1px solid black;
+    border-radius: 10px;
+    padding : 2px;
+}
+
+.status{
+    background-color: rgb(221, 44, 44);
+    color: white;
+    display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    height: 40px;
+    border-radius: 10px;
+    padding: 0 10px;
+}
+
+.action{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+}
+
+.action a {
+    user-select: none;
+    text-decoration: none;
+    margin: 5px 0;
+    font-family: 'Chivo', sans-serif;
+    width: 100px;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 10px;
+    font-weight: bold;
+}
+
+.viewFIR{
+    border: 3px solid rgb(37, 190, 31);
+    text-align: center;
+    border-radius: 10px;
+    color: black;
+    transition-duration: 0.2s;
+}
+
+.viewFIR:hover{
+    background-color: rgb(37, 190, 31);
+}
+
+.editFIR{
+    border: 3px solid rgb(110, 226, 255);
+    text-align: center;
+    border-radius: 10px;
+    color: black;
+    transition-duration: 0.2s;
+}
+
+.editFIR:hover{
+    background-color: rgb(110, 226, 255);
+}
+
+.deleteFIR{
+    border: 3px solid rgb(211, 39, 39);
+    text-align: center;
+    border-radius: 10px;
+    color: black;
+    transition-duration: 0.2s;
+}
+
+.deleteFIR:hover{
+    background-color: rgb(211, 39, 39);  
+    color: white;
+}
+

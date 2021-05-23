@@ -99,6 +99,7 @@ html{
 }
 
 #btn{
+    text-decoration: none;
     padding :10px 25px;
     /* margin-top: 2px; */
     border: none;
@@ -152,6 +153,17 @@ html{
     user-select: none;
 }
 
+
+.btn{
+    text-align: center;
+    margin-top: 55px;
+}
+
+.btn1{
+    /* margin-left: 500px; */
+    text-align: center;
+    margin-bottom: 100px;
+}
 
 .card{
     margin: 100px 120px;

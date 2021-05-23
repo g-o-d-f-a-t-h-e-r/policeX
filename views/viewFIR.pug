@@ -38,7 +38,8 @@ html(lang="en")
             div.welcome
                 p Welcome, #[span(style = "color: rgb(1, 75, 97); text-transform : uppercase; text-shadow: 0px 0 1px #000") #{fName} !]
 
-
+            div.btn
+                a(href="/myCases")#btn My Cases
             
             div.card
                 div.firNo
@@ -81,8 +82,7 @@ html(lang="en")
                         if allegedPhoto === 'NA'
                             img(src="https://img.icons8.com/fluent/100/000000/gender-neutral-user.png", alt="Alleged Image", id="img")
                         else
-                            img(src="/firImages/:filename", alt="Alleged Photo", id="img")
-                    
+                            img(src=`/firImages/?filename=${allegedPhoto}`, alt="Alleged Photo", id="img")
                     div.allegedfName.display
                         p.title Alleged First Name :
                         if allegedfName.length === 0
@@ -99,7 +99,7 @@ html(lang="en")
                     
                     div.allegedRelation.display
                         p.title Your relation with alleged body : 
-                        if relationWithAlleged.length === 0
+                        if relationWithAlleged == null
                             p.value NA 
                         else 
                             p.value #{relationWithAlleged}
@@ -116,11 +116,13 @@ html(lang="en")
 
                 div.dateOfIncidentFrom.display
                     p.title Date of Incident From : 
+                    //- p.value #{dateOfIncidentFrom.getDate()}-#{dateOfIncidentFrom.getMonth()+1}-#{dateOfIncidentFrom.getFullYear()}
                     p.value #{dateOfIncidentFrom}
                 
                 
                 div.dateOfIncidentTo.display
                     p.title Date of Incident To : 
+                    //- p.value #{dateOfIncidentTo.getDate()}-#{dateOfIncidentTo.getMonth()+1}-#{dateOfIncidentTo.getFullYear()}
                     p.value #{dateOfIncidentTo}
 
                 div.placeOfIncident.display
@@ -137,7 +139,7 @@ html(lang="en")
                 
                 div.totalMoneyInvolved.display
                     p.title Total Money Involved : 
-                    if totalMoneyInvolved.length === 0
+                    if totalMoneyInvolved == null
                         p.value NA 
                     else
                         p.value #{totalMoneyInvolved}
@@ -148,7 +150,10 @@ html(lang="en")
                 
                 div.objectInvolved.display
                     p.title Object Involved :
-                    p.value #{objectInvolved}
+                    if objectInvolved == ""
+                        p.value NA 
+                    else
+                        p.value #{objectInvolved}
                 
                 div.nearestPoliceStation.display
                     p.title Nearest Police Station from incident place : 
@@ -160,3 +165,5 @@ html(lang="en")
                 div.undertaking
                     p I hereby declare that the details furnished above are true and correct to the best of my knowledge and belief and I undertake the responsibility to inform about any changes therein, immediately.
                         
+            div.btn1
+                a(href="/myCases")#btn My Cases
