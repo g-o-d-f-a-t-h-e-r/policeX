@@ -113,6 +113,7 @@ html{
     cursor: pointer;
     transition-duration: 0.2s;
     font-size: 1.1rem;
+    text-decoration: none;
 
 }
 
@@ -150,6 +151,11 @@ html{
     font-weight: bold;
     font-family: 'Chivo', sans-serif;
     user-select: none;
+}
+
+.btn{
+    text-align: center;
+    margin-top: 50px;
 }
 
 .card{
