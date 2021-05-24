@@ -154,6 +154,11 @@ html{
 }
 
 
+.button{
+    text-align: center;
+    margin-top: 50px;
+}
+
 
 .card{
     padding: 50px;
