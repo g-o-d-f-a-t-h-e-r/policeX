@@ -1,0 +1,46 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(http-equiv="X-UA-Compatible", content="IE=edge")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Chivo:wght@300&family=Eczar&display=swap" rel="stylesheet"> 
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;700&display=swap" rel="stylesheet">
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;500&display=swap" rel="stylesheet">
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;500&display=swap" rel="stylesheet">
+        <link rel="shortcut icon" type="image/x-icon" href="../public/img/logo.png" />
+        link(rel="stylesheet", href="../public/css/accountSettings.css")
+        script(src="https://kit.fontawesome.com/a076d05399.js") 
+        title Account Settings
+    body 
+
+        div.content
+            div.logo
+                img(src="../public/img/logo.png", alt="Police-X Logo")
+            div.settings
+                div.msg
+                    p #{msg}
+                div.fName.display
+                    p.title First Name :
+                    p.value #{fName} 
+                div.lName.display
+                    p.title Last Name :
+                    p.value #{lName}
+                div.phoneNo.display
+                    p.title Phone Number :
+                    p.value #{phoneNo}
+                div.emailAdd.display
+                    p.title Email Address : 
+                    p.value #{emailAdd}
+                div.changePassword
+                    a(href="/changePassword") Change Password
+                div.button
+                    a(href="/dashboard")#btn Return to Dashboard
+
+
+
+        script(src="../public/scripts/accountSettings.js")         

@@ -1193,7 +1193,103 @@ app.get('/confirmation', redirectLogin, (req, res) => {
 
 
 app.get('/accountSettings', redirectLogin, (req, res) => {
-    res.status(200).render('ahed.pug')
+
+    userProfile.findOne({
+        emailAdd : req.session.emailAdd
+    })
+    .then((user) => {
+        res.status(200).render('accountSettings.pug', {
+            emailAdd : req.session.emailAdd,
+            fName : req.session.fName,
+            lName : req.session.lName,
+            phoneNo : user.phoneNo
+        })
+    })
+    .catch((err) => {
+        console.log("Error finding profile in userProfile", err0)
+    })
+
+})
+
+app.get('/changePassword', redirectLogin, (req, res) => {
+
+    res.status(200).render('changePassword.pug', {
+        emailAdd : req.session.emailAdd,
+        fName : req.session.fName,
+        lName : req.session.lName,
+    })
+})
+
+app.post('/changePassword', (req, res) => {
+
+    const { oldPassword, password, confirmPassword } = req.body;
+
+    if(password === confirmPassword){
+
+        const user = User.findOne({
+            emailAdd : req.session.emailAdd
+        })
+        .then(async (user) => {
+            if(user){
+                const status = await bcrypt.compare(oldPassword, user.key);
+
+                if(status){
+                    const bkey = await bcrypt.hash(password, 10);
+                    
+                    const query = { emailAdd : req.session.emailAdd }
+
+                    const newValues = {$set: {
+                        key : bkey
+                    }}
+
+                    User.updateOne(query, newValues, (err, response) => {
+        
+                        if(err){
+                            console.log('Error Changing Password : ', err)
+                        }
+                        console.log('Password Changed Successfully !')
+                
+                    })
+
+                    userProfile.findOne({
+                        emailAdd : req.session.emailAdd
+                    })
+                    .then((user) => {
+                        res.status(200).render('accountSettings.pug', {
+                            emailAdd : req.session.emailAdd,
+                            fName : req.session.fName,
+                            lName : req.session.lName,
+                            phoneNo : user.phoneNo,
+                            msg : `Password changed Successfully !`
+                        })
+                    })
+                    .catch((err) => {
+                        console.log("Error finding profile in userProfile", err0)
+                    })
+
+                }else{
+                    res.status(200).render('changePassword.pug', {
+                        msg : `Your Existing Password is Incorrect !`
+                    })
+                }
+    
+            }
+            else{
+                res.status(200).render('dashboard.pug', {
+                    fName : req.session.fName
+                })
+            }
+        })
+        .catch((error) => {
+            console.log("Unknown error finding user in the Database", error);
+        })
+    }
+    else{
+        res.status(200).render('changePassword.pug', {
+            msg : `Password and Confirm Password did not match !`
+        })
+    }
+
 })
 
 // -------------------------------------------------LOGOUT ------------------------------------------------------
