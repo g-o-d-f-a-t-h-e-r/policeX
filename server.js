@@ -16,6 +16,7 @@ const moment = require('moment');
 const { ReadStream } = require('fs');
 const userFIR = require('./model/userFirs');
 const infoAboutMishap = require('./model/inform');
+const missingPerson = require('./model/missingPerson')
 
 
 
@@ -363,7 +364,6 @@ app.get('/aadharCardImage/:filename', redirectLogin, (req,res) => {
 app.get('/firImages/', redirectLogin, (req,res) => {
 
     const allegedPhoto = req.param('filename')
-    console.log(allegedPhoto)
     
     //Finding allegedPhoto Image
     gfs.files.findOne({filename : allegedPhoto}, (err, file) => {
@@ -384,6 +384,33 @@ app.get('/firImages/', redirectLogin, (req,res) => {
     })
      
 })
+
+
+// Middleware for Getting FIR IMAGES from the GFS Chunks -
+app.get('/missingPhotos/', redirectLogin, (req,res) => {
+
+    const missingPerson = req.param('filename')
+    
+    //Finding allegedPhoto Image
+    gfs.files.findOne({filename : missingPerson}, (err, file) => {
+        if(!file || file.length === 0){
+            return res.status(404).json({
+                err : 'No file exists'
+            })
+        }
+
+        if(file.contentType === 'image/jpeg' || file.contentType === 'image/png'){
+            let missingPerson = gfs.createReadStream(file.filename);
+            missingPerson.pipe(res);
+        }else{
+            res.status(404).json({
+                err : 'Not an Image'
+            })
+        }
+    })
+     
+})
+
 // --------------------------------------------------------------------------------------------------------------
 
 
@@ -434,7 +461,7 @@ app.get('/myProfile', redirectLogin, (req, res) => {
                 pincode : "NA",
                 aadharNo : "XXXXXXXXXXXX",
                 status : 0,
-                msg : "You need to complete your USER PROFILE in order to file FIRs."    
+                msg : "You need to complete your USER PROFILE in order to file FIRs/ Inform about Mishap/ Report Missing Person."    
             })
         }
     })
@@ -900,6 +927,11 @@ app.get('/deleteFIR', redirectLogin, (req, res) => {
 // ---------------------------------------------------------------------------------------------------------------
 
 
+
+
+
+
+// Inform About Mishappening-----------------------------------------------------------------------------------
 app.get('/inform', redirectLogin, (req, res) => {
 
     userProfile.findOne({
@@ -951,10 +983,203 @@ app.post('/inform', (req, res) => {
     })
 
 })
+// -----------------------------------------------------------------------------------------------------------
 
+
+
+
+
+
+
+// Missing Person Report ---------------------------------------------------------------------------------------
 app.get('/missingPerson', redirectLogin, (req, res) => {
-    res.status(200).render('ahed.pug')
+
+    userProfile.findOne({
+        emailAdd : req.session.emailAdd
+    })
+    .then((user) => {
+        if(user){
+            res.status(200).render('missingPerson.pug', {
+                emailAdd : req.session.emailAdd,
+                fName : req.session.fName,
+                lName : req.session.lName
+            })
+        }else{
+            res.status(200).render('editProfile.pug', {
+                emailAdd : req.session.emailAdd,
+                fName : req.session.fName,
+                lName : req.session.lName,
+                msg : 'Complete your User Profile First !'
+            })
+        }
+    })
+    
 })
+
+
+app.post('/missingPerson', upload.fields([{ name : 'missingPhoto', maxCount : 1 }, { name : 'missingPhotoID', maxCount : 1 }]), (req, res) => {
+
+    const {salutation, missingFName, missingLName, gender, dob, religion, phoneNo, aadharNo, occupation, nationality, houseNoAndBuilding, street, area, city, pincode, state, status} = req.body;
+    const emailAdd = req.session.emailAdd;
+    const fName = req.session.fName;
+    const lName = req.session.lName;
+    const missingPhoto = req.files['missingPhoto'][0].filename;
+    const missingPhotoID = req.files['missingPhotoID'][0].filename;
+
+
+    const missingObj = {
+
+        emailAdd : emailAdd,
+        reportNo : `PLX-${Math.floor(10000000 + Math.random() * 90000000)}`,
+        salutation : salutation,
+        missingFName : missingFName,
+        missingLName : missingLName,
+        gender : gender,
+        dob : dob,
+        religion : religion,
+        phoneNo : phoneNo,
+        aadharNo : aadharNo,
+        occupation : occupation,
+        nationality : nationality,
+        houseNoAndBuilding : houseNoAndBuilding,
+        street : street,
+        area : area,
+        city : city,
+        pincode : pincode,
+        state : state,
+        status : status,
+        missingPhoto : missingPhoto,
+        missingPhotoID : missingPhotoID
+
+    }
+
+    missingPerson.findOne({
+        aadharNo : aadharNo
+    })
+    .then((user) => {
+
+        if(!user){
+            new missingPerson(missingObj).save()
+            .then(()=> {
+                console.log('Successfully filed missing report')
+                res.status(200).render('viewMissingReport.pug', {
+                    missingObj : missingObj,
+                    fName : req.session.fName
+                })
+            })
+            .catch((err) => {
+                console.log("Error saving Missing Report to the database : ", err)
+            })
+        }else{
+            res.status(200).render('missingPerson.pug', {
+                fName : req.session.fName,
+                msg : `This Person's Missing Report has been already registered !`
+            })
+        }
+
+    })
+    
+})
+
+
+
+
+
+app.get('/missingList', redirectLogin, (req, res) => {
+
+    missingPerson.find({
+        emailAdd : req.session.emailAdd
+    })
+    .then((users) => {
+
+        console.log("Found Missing Person associated with this email ID")
+        res.status(200).render('missingList.pug', {
+            users : users,
+            fName : req.session.fName
+        })
+        
+    })
+    .catch((err) => {
+        console.log("Error Finding the users : ", err)
+    })
+    
+})
+
+
+app.get('/viewMissingReport', redirectLogin, (req, res) => {
+
+    const reportNo = req.param('reportNo')
+
+    missingPerson.findOne({
+        emailAdd : req.session.emailAdd,
+        reportNo : reportNo
+    })
+    .then((user) => {
+        res.status(200).render('viewMissingReport.pug', {
+            missingObj : user,
+            fName : req.session.fName
+        })
+    })
+    .catch((err) => {
+        console.log("Error finding the desired missing person's report : ", err)
+    })
+    
+})
+
+
+app.get('/deleteMissingReport', redirectLogin, (req, res) => {
+
+    const reportNo = req.param('reportNo')
+
+    missingPerson.findOne({
+        emailAdd : req.session.emailAdd,
+        reportNo : reportNo
+    })
+    .then((user) => {
+
+        gfs.remove({filename : user.missingPhoto, root : 'userProfileImgs'}, function (err) {
+            if (err){
+                console.log("Can't delete Profile Photo", err);
+            }
+            console.log('Old Missing Photo Image deleted Successfully');
+        });
+
+        gfs.remove({filename : user.missingPhotoID, root : 'userProfileImgs'}, function (err) {
+            if (err){
+                console.log("Can't delete Profile Photo", err);
+            }
+            console.log('Old Missing Photo ID deleted Successfully');
+        });
+
+
+        const query = {reportNo : reportNo}
+
+        missingPerson.deleteOne(query, (err, obj) => {
+            if(err){
+                console.log('Cant delete Missing Person : ', err)
+            }else{
+                console.log('Missing Person profile deleted successfully')
+            }
+    
+        })
+
+        res.redirect('/missingList')
+
+    })
+    .catch((err) => {
+        console.log('Cant delete Missing Persons profile...')
+    })
+
+})
+
+// ------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
 
 app.get('/confirmation', redirectLogin, (req, res) => {
     res.status(200).render('confirmation.pug',{
@@ -964,6 +1189,8 @@ app.get('/confirmation', redirectLogin, (req, res) => {
         msg : ``
     })
 })
+
+
 
 app.get('/accountSettings', redirectLogin, (req, res) => {
     res.status(200).render('ahed.pug')

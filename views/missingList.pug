@@ -1,0 +1,70 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(http-equiv="X-UA-Compatible", content="IE=edge")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Chivo:wght@300&family=Eczar&display=swap" rel="stylesheet"> 
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;700&display=swap" rel="stylesheet">
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;500&display=swap" rel="stylesheet">
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;500&display=swap" rel="stylesheet">
+        <link rel="shortcut icon" type="image/x-icon" href="../public/img/logo.png" />
+        link(rel="stylesheet", href="../public/css/missingList.css")
+        script(src="https://kit.fontawesome.com/a076d05399.js") 
+        title Missing Persons List
+    body 
+        header#nav-area
+        div#navbar
+            a(href="http://policex.herokuapp.com").logo 
+                div#logo
+                    img(src="../public/img/logo.png", alt="", srcset="")
+                    h1 #[span P]olice - X
+            ul
+                li #[a(href='/dashboard') Dashboard]
+                //- li #[a(href="http://") About Us]
+                li #[a(href="#news") News]
+                li #[a(href="http://") Services] 
+                form(action="/logout", method="post") 
+                    button#btn Logout
+
+        div#content
+            div.userDashboard
+                h1 Missing Persons List
+
+            div.welcome
+                p Welcome, #[span(style = "color: rgb(1, 75, 97); text-transform : uppercase; text-shadow: 0px 0 1px #000") #{fName} !]        
+
+            div.card
+                table.content-table
+                    thead 
+                        tr
+                            th Report No 
+                            th Missing Photo
+                            th Missing Person's Name
+                            th Aadhar Number
+                            th Status 
+                            th Action
+                    
+                    tbody 
+
+                        for user in users
+                            tr.FIR 
+                                th #{user.reportNo} 
+                                td                                     
+                                    img(src=`/missingPhotos/?filename=${user.missingPhoto}`, alt="Missing Person's Image", id="img")
+                                td #{user.missingFName} #{user.missingLName} 
+                                td #{user.aadharNo} 
+                                td  
+                                    if user.status == 0
+                                        p.status.color0 Pending...
+                                    if user.status == 1
+                                        p.status.color1 In Progress...
+                                    if user.status == 2
+                                        p.status.color2 Approved 
+                                td.action
+                                    a(href=`/viewMissingReport/?reportNo=${user.reportNo}`).viewFIR View Report
+                                    a(href=`/deleteMissingReport/?reportNo=${user.reportNo}`).deleteFIR Delete Report  

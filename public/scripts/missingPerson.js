@@ -86,6 +86,17 @@ cancelBtn2.addEventListener("click", () => {
 
 
 
+// Msg Timeout ------------------------------------------------------------
+
+const msg = document.querySelector('.msg')
+
+setTimeout(() => {
+    msg.style.display = 'none'
+}, 10000);
+
+
+
+
 
 // MODAL ---------------------------------------------------------------------------------------------------
 // const input = document.querySelectorAll('.input');

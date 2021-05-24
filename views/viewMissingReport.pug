@@ -1,0 +1,149 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(http-equiv="X-UA-Compatible", content="IE=edge")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Chivo:wght@300&family=Eczar&display=swap" rel="stylesheet"> 
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;700&display=swap" rel="stylesheet">
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;500&display=swap" rel="stylesheet">
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;500&display=swap" rel="stylesheet">
+        <link rel="shortcut icon" type="image/x-icon" href="../public/img/logo.png" />
+        link(rel="stylesheet", href="../public/css/viewMissingReport.css")
+        script(src="https://kit.fontawesome.com/a076d05399.js") 
+        title View Missing Report
+    body 
+        header#nav-area
+        div#navbar
+            a(href="http://policex.herokuapp.com").logo 
+                div#logo
+                    img(src="../public/img/logo.png", alt="", srcset="")
+                    h1 #[span P]olice - X
+            ul
+                li #[a(href='/dashboard') Dashboard]
+                //- li #[a(href="http://") About Us]
+                li #[a(href="#news") News]
+                li #[a(href="http://") Services] 
+                form(action="/logout", method="post") 
+                    button#btn Logout
+
+        div#content
+            div.userDashboard
+                h1 View Missing Report
+
+            div.welcome
+                p Welcome, #[span(style = "color: rgb(1, 75, 97); text-transform : uppercase; text-shadow: 0px 0 1px #000") #{fName} !]
+            
+
+            div.button
+                a(href="/missingList")#btn Missing Persons List
+
+        if missingObj 
+            div.card
+                div.firNo
+                    p.firno Report No : 
+                    p.firValue #{missingObj.reportNo}
+                p.head Missing Person's Personal Details 
+                hr
+                div.salutation.display
+                    p.title Salutation : 
+                    p.value #{missingObj.salutation}
+
+                div.fName.display
+                    p.title First Name : 
+                    p.value #{missingObj.missingFName}
+
+                div.lName.display
+                    p.title Last Name : 
+                    p.value #{missingObj.missingLName}
+                
+                div.gender.display
+                    p.title Gender : 
+                    p.value #{missingObj.gender}
+                
+                div.dob.display
+                    p.title D.O.B. : 
+                    p.value #{missingObj.dob}
+                
+                div.religion.display
+                    p.title Religion : 
+                    p.value #{missingObj.religion} 
+
+                div.phoneNo.display
+                    p.title Residence Phone Number : 
+                    p.value #{missingObj.phoneNo}
+                
+                div.aadharNo.display
+                    p.title Aadhar Number : 
+                    p.value #{missingObj.aadharNo}
+                
+                div.occupation.display
+                    p.title Occupation : 
+                    p.value #{missingObj.occupation}
+
+                div.nationality.display
+                    p.title Nationality: 
+                    p.value #{missingObj.nationality}
+                
+
+                p.head Missing Person's Address Details
+                hr
+
+
+                div.houseNoAndBuilding.display
+                    p.title House Number and Building Name : 
+                    p.value #{missingObj.houseNoAndBuilding}
+                
+                div.street.display
+                    p.title Street : 
+                    p.value #{missingObj.street}
+
+                div.area.display
+                    p.title Area : 
+                    p.value #{missingObj.area}
+
+                div.city.display
+                    p.title City: 
+                    p.value #{missingObj.city}
+
+                div.pincode.display
+                    p.title Pincode : 
+                    p.value #{missingObj.pincode}
+                
+                div.state.display
+                    p.title State : 
+                    p.value #{missingObj.state}
+                
+                
+
+                p.head IDENTITY PROOF OF MISSING PERSON
+                hr
+
+                div.missingPhoto.display
+                    p.title Photograph of Missing Person :
+                    div.image1
+                        img(src=`/missingPhotos/?filename=${missingObj.missingPhoto}`, alt="Missing Photo")#img1
+                
+                div.missingPhotoID.display
+                    p.title Aadhar Card Image of Missing Person :
+                    div.image2
+                        img(src=`/missingPhotos/?filename=${missingObj.missingPhotoID}`, alt="Missing Photo ID")#img2
+                
+                
+                
+
+                p.head Declaration
+                hr
+
+                div.undertaking
+                    p I hereby declare that the details furnished above are true and correct to the best of my knowledge and belief and I undertake the responsibility to inform about any changes therein, immediately.
+                        
+
+
+            div.button1
+                a(href="/missingList")#btn Missing Persons List  
+                

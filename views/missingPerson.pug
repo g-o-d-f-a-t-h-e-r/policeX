@@ -1,0 +1,495 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(http-equiv="X-UA-Compatible", content="IE=edge")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Chivo:wght@300&family=Eczar&display=swap" rel="stylesheet"> 
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;700&display=swap" rel="stylesheet">
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;500&display=swap" rel="stylesheet">
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;500&display=swap" rel="stylesheet">
+        <link rel="shortcut icon" type="image/x-icon" href="../public/img/logo.png" />
+        link(rel="stylesheet", href="../public/css/missingPerson.css")
+        script(src="https://kit.fontawesome.com/a076d05399.js") 
+        title Report Missing Person
+    body 
+        header#nav-area
+        div#navbar
+            a(href="http://policex.herokuapp.com").logo 
+                div#logo
+                    img(src="../public/img/logo.png", alt="", srcset="")
+                    h1 #[span P]olice - X
+            ul
+                li #[a(href='/dashboard') Dashboard]
+                //- li #[a(href="http://") About Us]
+                li #[a(href="#news") News]
+                li #[a(href="http://") Services] 
+                form(action="/logout", method="post") 
+                    button#btn Logout
+
+        div#content
+            div.userDashboard
+                h1 Report Missing Person
+
+            div.welcome
+                p Welcome, #[span(style = "color: rgb(1, 75, 97); text-transform : uppercase; text-shadow: 0px 0 1px #000") #{fName} !]
+            
+            div.msg
+                p #{msg}
+
+            div.button
+                a(href="/missingList")#btn Missing Persons List
+
+            div.missingPerson
+                form(action="/missingPerson", enctype = "multipart/form-data", method="post" onsubmit= "openModal()")
+                    
+                    p.head MISSING PERSON'S PERSONAL DETAILS 
+                    hr
+
+                    div.salutation.display
+                        p.title.required Salutation : 
+                        select(name="salutation" required).input
+                            option(disabled selected value) -------------Salutation-------------
+                            option(value="Mr.") Mr.
+                            option(value="Mrs.") Mrs.
+                            option(value="Hon.") Hon.
+                            option(value="Dr.") Dr.
+                            option(value="Prof.") Prof.
+                            option(value="Shri.") Shri.
+                            option(value="Smt.") Smt.
+                            option(value="Miss.") Miss.
+                    
+                    div.fName.display
+                        p.title.required First Name : 
+                        input(type="text" name='missingFName' placeholder="Eg : John" required)
+                    
+                    div.lName.display
+                        p.title.required Last Name : 
+                        input(type="text" name="missingLName" placeholder="Eg : Doe" required)
+                    
+                    
+                    div.gender.display
+                        p.title.required Gender : 
+                        select(name="gender" required).input
+                            option(disabled selected value) ---------------Gender---------------
+                            option(value="Male") Male
+                            option(value="Female") Female
+                            option(value="Others") Others
+                    
+                    div.dob.display
+                        p.title.required D.O.B. : 
+                        input(type="date", name="dob" required)
+
+                    div.religion.display
+                        p.title.required Religion : 
+                        select(name="religion" required).input
+                            option(disabled selected value) ---------------Religion---------------
+                            option(value="Hindu") Hindu
+                            option(value="Muslim") Muslim
+                            option(value="Sikh") Sikh
+                            option(value="Christians") Christian
+                            option(value="Others") Others
+                        
+                    div.phoneNo.display
+                        p.title.required Residence Phone Number : 
+                        input(type="number" name='phoneNo' placeholder="10 digits Phone Number" required)
+                    
+                    div.aadharNo.display
+                        p.title.required Aadhar Number : 
+                        input(type="number" name='aadharNo' placeholder="12 digits Aadhar Number" required)
+
+                    div.occupation.display
+                        p.title.required Occupation : 
+                        input(type="text" name="occupation" placeholder="Eg : Job" required)
+                    
+                    div.nationality.display
+                        p.title.required Nationality : 
+                        select(name='nationality' required).input
+                            option(value='India' selected) India
+                            option(value='Afganistan') Afghanistan
+                            option(value='Albania') Albania
+                            option(value='Algeria') Algeria
+                            option(value='American Samoa') American Samoa
+                            option(value='Andorra') Andorra
+                            option(value='Angola') Angola
+                            option(value='Anguilla') Anguilla
+                            option(value='Antigua & Barbuda') Antigua &amp; Barbuda
+                            option(value='Argentina') Argentina
+                            option(value='Armenia') Armenia
+                            option(value='Aruba') Aruba
+                            option(value='Australia') Australia
+                            option(value='Austria') Austria
+                            option(value='Azerbaijan') Azerbaijan
+                            option(value='Bahamas') Bahamas
+                            option(value='Bahrain') Bahrain
+                            option(value='Bangladesh') Bangladesh
+                            option(value='Barbados') Barbados
+                            option(value='Belarus') Belarus
+                            option(value='Belgium') Belgium
+                            option(value='Belize') Belize
+                            option(value='Benin') Benin
+                            option(value='Bermuda') Bermuda
+                            option(value='Bhutan') Bhutan
+                            option(value='Bolivia') Bolivia
+                            option(value='Bonaire') Bonaire
+                            option(value='Bosnia & Herzegovina') Bosnia &amp; Herzegovina
+                            option(value='Botswana') Botswana
+                            option(value='Brazil') Brazil
+                            option(value='British Indian Ocean Ter') British Indian Ocean Ter
+                            option(value='Brunei') Brunei
+                            option(value='Bulgaria') Bulgaria
+                            option(value='Burkina Faso') Burkina Faso
+                            option(value='Burundi') Burundi
+                            option(value='Cambodia') Cambodia
+                            option(value='Cameroon') Cameroon
+                            option(value='Canada') Canada
+                            option(value='Canary Islands') Canary Islands
+                            option(value='Cape Verde') Cape Verde
+                            option(value='Cayman Islands') Cayman Islands
+                            option(value='Central African Republic') Central African Republic
+                            option(value='Chad') Chad
+                            option(value='Channel Islands') Channel Islands
+                            option(value='Chile') Chile
+                            option(value='China') China
+                            option(value='Christmas Island') Christmas Island
+                            option(value='Cocos Island') Cocos Island
+                            option(value='Colombia') Colombia
+                            option(value='Comoros') Comoros
+                            option(value='Congo') Congo
+                            option(value='Cook Islands') Cook Islands
+                            option(value='Costa Rica') Costa Rica
+                            option(value='Cote DIvoire') Cote DIvoire
+                            option(value='Croatia') Croatia
+                            option(value='Cuba') Cuba
+                            option(value='Curaco') Curacao
+                            option(value='Cyprus') Cyprus
+                            option(value='Czech Republic') Czech Republic
+                            option(value='Denmark') Denmark
+                            option(value='Djibouti') Djibouti
+                            option(value='Dominica') Dominica
+                            option(value='Dominican Republic') Dominican Republic
+                            option(value='East Timor') East Timor
+                            option(value='Ecuador') Ecuador
+                            option(value='Egypt') Egypt
+                            option(value='El Salvador') El Salvador
+                            option(value='Equatorial Guinea') Equatorial Guinea
+                            option(value='Eritrea') Eritrea
+                            option(value='Estonia') Estonia
+                            option(value='Ethiopia') Ethiopia
+                            option(value='Falkland Islands') Falkland Islands
+                            option(value='Faroe Islands') Faroe Islands
+                            option(value='Fiji') Fiji
+                            option(value='Finland') Finland
+                            option(value='France') France
+                            option(value='French Guiana') French Guiana
+                            option(value='French Polynesia') French Polynesia
+                            option(value='French Southern Ter') French Southern Ter
+                            option(value='Gabon') Gabon
+                            option(value='Gambia') Gambia
+                            option(value='Georgia') Georgia
+                            option(value='Germany') Germany
+                            option(value='Ghana') Ghana
+                            option(value='Gibraltar') Gibraltar
+                            option(value='Great Britain') Great Britain
+                            option(value='Greece') Greece
+                            option(value='Greenland') Greenland
+                            option(value='Grenada') Grenada
+                            option(value='Guadeloupe') Guadeloupe
+                            option(value='Guam') Guam
+                            option(value='Guatemala') Guatemala
+                            option(value='Guinea') Guinea
+                            option(value='Guyana') Guyana
+                            option(value='Haiti') Haiti
+                            option(value='Hawaii') Hawaii
+                            option(value='Honduras') Honduras
+                            option(value='Hong Kong') Hong Kong
+                            option(value='Hungary') Hungary
+                            option(value='Iceland') Iceland
+                            option(value='Indonesia') Indonesia
+                            option(value='Iran') Iran
+                            option(value='Iraq') Iraq
+                            option(value='Ireland') Ireland
+                            option(value='Isle of Man') Isle of Man
+                            option(value='Israel') Israel
+                            option(value='Italy') Italy
+                            option(value='Jamaica') Jamaica
+                            option(value='Japan') Japan
+                            option(value='Jordan') Jordan
+                            option(value='Kazakhstan') Kazakhstan
+                            option(value='Kenya') Kenya
+                            option(value='Kiribati') Kiribati
+                            option(value='Korea North') Korea North
+                            option(value='Korea Sout') Korea South
+                            option(value='Kuwait') Kuwait
+                            option(value='Kyrgyzstan') Kyrgyzstan
+                            option(value='Laos') Laos
+                            option(value='Latvia') Latvia
+                            option(value='Lebanon') Lebanon
+                            option(value='Lesotho') Lesotho
+                            option(value='Liberia') Liberia
+                            option(value='Libya') Libya
+                            option(value='Liechtenstein') Liechtenstein
+                            option(value='Lithuania') Lithuania
+                            option(value='Luxembourg') Luxembourg
+                            option(value='Macau') Macau
+                            option(value='Macedonia') Macedonia
+                            option(value='Madagascar') Madagascar
+                            option(value='Malaysia') Malaysia
+                            option(value='Malawi') Malawi
+                            option(value='Maldives') Maldives
+                            option(value='Mali') Mali
+                            option(value='Malta') Malta
+                            option(value='Marshall Islands') Marshall Islands
+                            option(value='Martinique') Martinique
+                            option(value='Mauritania') Mauritania
+                            option(value='Mauritius') Mauritius
+                            option(value='Mayotte') Mayotte
+                            option(value='Mexico') Mexico
+                            option(value='Midway Islands') Midway Islands
+                            option(value='Moldova') Moldova
+                            option(value='Monaco') Monaco
+                            option(value='Mongolia') Mongolia
+                            option(value='Montserrat') Montserrat
+                            option(value='Morocco') Morocco
+                            option(value='Mozambique') Mozambique
+                            option(value='Myanmar') Myanmar
+                            option(value='Nambia') Nambia
+                            option(value='Nauru') Nauru
+                            option(value='Nepal') Nepal
+                            option(value='Netherland Antilles') Netherland Antilles
+                            option(value='Netherlands') Netherlands (Holland, Europe)
+                            option(value='Nevis') Nevis
+                            option(value='New Caledonia') New Caledonia
+                            option(value='New Zealand') New Zealand
+                            option(value='Nicaragua') Nicaragua
+                            option(value='Niger') Niger
+                            option(value='Nigeria') Nigeria
+                            option(value='Niue') Niue
+                            option(value='Norfolk Island') Norfolk Island
+                            option(value='Norway') Norway
+                            option(value='Oman') Oman
+                            option(value='Pakistan') Pakistan
+                            option(value='Palau Island') Palau Island
+                            option(value='Palestine') Palestine
+                            option(value='Panama') Panama
+                            option(value='Papua New Guinea') Papua New Guinea
+                            option(value='Paraguay') Paraguay
+                            option(value='Peru') Peru
+                            option(value='Phillipines') Philippines
+                            option(value='Pitcairn Island') Pitcairn Island
+                            option(value='Poland') Poland
+                            option(value='Portugal') Portugal
+                            option(value='Puerto Rico') Puerto Rico
+                            option(value='Qatar') Qatar
+                            option(value='Republic of Montenegro') Republic of Montenegro
+                            option(value='Republic of Serbia') Republic of Serbia
+                            option(value='Reunion') Reunion
+                            option(value='Romania') Romania
+                            option(value='Russia') Russia
+                            option(value='Rwanda') Rwanda
+                            option(value='St Barthelemy') St Barthelemy
+                            option(value='St Eustatius') St Eustatius
+                            option(value='St Helena') St Helena
+                            option(value='St Kitts-Nevis') St Kitts-Nevis
+                            option(value='St Lucia') St Lucia
+                            option(value='St Maarten') St Maarten
+                            option(value='St Pierre & Miquelon') St Pierre &amp; Miquelon
+                            option(value='St Vincent & Grenadines') St Vincent &amp; Grenadines
+                            option(value='Saipan') Saipan
+                            option(value='Samoa') Samoa
+                            option(value='Samoa American') Samoa American
+                            option(value='San Marino') San Marino
+                            option(value='Sao Tome & Principe') Sao Tome &amp; Principe
+                            option(value='Saudi Arabia') Saudi Arabia
+                            option(value='Senegal') Senegal
+                            option(value='Seychelles') Seychelles
+                            option(value='Sierra Leone') Sierra Leone
+                            option(value='Singapore') Singapore
+                            option(value='Slovakia') Slovakia
+                            option(value='Slovenia') Slovenia
+                            option(value='Solomon Islands') Solomon Islands
+                            option(value='Somalia') Somalia
+                            option(value='South Africa') South Africa
+                            option(value='Spain') Spain
+                            option(value='Sri Lanka') Sri Lanka
+                            option(value='Sudan') Sudan
+                            option(value='Suriname') Suriname
+                            option(value='Swaziland') Swaziland
+                            option(value='Sweden') Sweden
+                            option(value='Switzerland') Switzerland
+                            option(value='Syria') Syria
+                            option(value='Tahiti') Tahiti
+                            option(value='Taiwan') Taiwan
+                            option(value='Tajikistan') Tajikistan
+                            option(value='Tanzania') Tanzania
+                            option(value='Thailand') Thailand
+                            option(value='Togo') Togo
+                            option(value='Tokelau') Tokelau
+                            option(value='Tonga') Tonga
+                            option(value='Trinidad & Tobago') Trinidad &amp; Tobago
+                            option(value='Tunisia') Tunisia
+                            option(value='Turkey') Turkey
+                            option(value='Turkmenistan') Turkmenistan
+                            option(value='Turks & Caicos Is') Turks &amp; Caicos Is
+                            option(value='Tuvalu') Tuvalu
+                            option(value='Uganda') Uganda
+                            option(value='United Kingdom') United Kingdom
+                            option(value='Ukraine') Ukraine
+                            option(value='United Arab Erimates') United Arab Emirates
+                            option(value='United States of America') United States of America
+                            option(value='Uraguay') Uruguay
+                            option(value='Uzbekistan') Uzbekistan
+                            option(value='Vanuatu') Vanuatu
+                            option(value='Vatican City State') Vatican City State
+                            option(value='Venezuela') Venezuela
+                            option(value='Vietnam') Vietnam
+                            option(value='Virgin Islands (Brit)') Virgin Islands (Brit)
+                            option(value='Virgin Islands (USA)') Virgin Islands (USA)
+                            option(value='Wake Island') Wake Island
+                            option(value='Wallis & Futana Is') Wallis &amp; Futana Is
+                            option(value='Yemen') Yemen
+                            option(value='Zaire') Zaire
+                            option(value='Zambia') Zambia
+                            option(value='Zimbabwe') Zimbabwe
+
+                    
+                    p.head Missing Person's Address Details 
+                    hr
+
+                    div.houseNoAndBuilding.display
+                        p.title.required House Number and Building Name : 
+                        input(type="text" name="houseNoAndBuilding" placeholder="Eg : A-001 Sky Heights" required)
+                    
+                    div.street.display
+                        p.title.required Street : 
+                        input(type="text" name="street" placeholder="Eg : 6th Street" required)
+                    
+                    div.street.display
+                        p.title.required Area : 
+                        input(type="text" name="area" placeholder="Eg : Andheri" required)
+                    
+                    div.city.display
+                        p.title.required City : 
+                        input(type="text" name="city" placeholder="Eg : Mumbai" required)
+                    
+                    div.pincode.display
+                        p.title.required Pincode : 
+                        input(type="number" name="pincode" placeholder="Pincode" required)
+
+                    div.state.display
+                        p.title.required State : 
+                        select(name='state' required).input
+                            option(disabled selected value) -------------Select State-----------
+                            option(value='Andhra Pradesh') Andhra Pradesh
+                            option(value='Andaman and Nicobar Islands') Andaman and Nicobar Islands
+                            option(value='Arunachal Pradesh') Arunachal Pradesh
+                            option(value='Assam') Assam
+                            option(value='Bihar') Bihar
+                            option(value='Chandigarh') Chandigarh
+                            option(value='Chhattisgarh') Chhattisgarh
+                            option(value='Dadar and Nagar Haveli') Dadar and Nagar Haveli
+                            option(value='Daman and Diu') Daman and Diu
+                            option(value='Delhi') Delhi
+                            option(value='Lakshadweep') Lakshadweep
+                            option(value='Puducherry') Puducherry
+                            option(value='Goa') Goa
+                            option(value='Gujarat') Gujarat
+                            option(value='Haryana') Haryana
+                            option(value='Himachal Pradesh') Himachal Pradesh
+                            option(value='Jammu and Kashmir') Jammu and Kashmir
+                            option(value='Jharkhand') Jharkhand
+                            option(value='Karnataka') Karnataka
+                            option(value='Kerala') Kerala
+                            option(value='Madhya Pradesh') Madhya Pradesh
+                            option(value='Maharashtra') Maharashtra
+                            option(value='Manipur') Manipur
+                            option(value='Meghalaya') Meghalaya
+                            option(value='Mizoram') Mizoram
+                            option(value='Nagaland') Nagaland
+                            option(value='Odisha') Odisha
+                            option(value='Punjab') Punjab
+                            option(value='Rajasthan') Rajasthan
+                            option(value='Sikkim') Sikkim
+                            option(value='Tamil Nadu') Tamil Nadu
+                            option(value='Telangana') Telangana
+                            option(value='Tripura') Tripura
+                            option(value='Uttar Pradesh') Uttar Pradesh
+                            option(value='Uttarakhand') Uttarakhand
+                            option(value='West Bengal') West Bengal
+
+                    p.head Identity proof of Missing Person 
+                    hr
+
+                    div.missingPhoto.display
+                        p.title.required Photograph of Missing Person : 
+                        div.profilePhoto
+
+                                div.yourPhoto
+                                    //- p  Profile Photo :
+                                div.container1
+                                    div.msg1
+                                        p Please upload Profile Photo !
+                                    div.wrapper1
+                                        div.image
+                                            img(src="" altsrc="")#img1
+                                        div.content
+                                            div.icon
+                                                i.fas.fa-cloud-upload-alt
+                                            div.text Upload Profile Photo
+                                        div#cancel-btn1
+                                            i.fas.fas.fa-times
+                                        div.file-name#fileName1
+                                    input(type="file" name="missingPhoto" hidden required)#default-btn1.input1
+                                    p(onclick ="defaultBtnActive1()")#custom-btn1 Choose a File
+
+                    div.missingPhotoID.display
+                        p.title.required Aadhar Card of Missing Person : 
+                        div.aadharCardImage
+                            div.yourPhoto
+                                //- p  Aadhar Photo :
+                            div.container2
+                                div.msg2
+                                    p Please upload Aadhar Card Image !
+                                div.wrapper2
+                                    div.image
+                                        img(src="" altsrc="")#img2
+                                    div.content
+                                        div.icon
+                                            i.fas.fa-cloud-upload-alt
+                                        div.text Upload Aadhar Card Image
+                                    div#cancel-btn2
+                                        i.fas.fas.fa-times
+                                    div.file-name#fileName2
+                                input(type="file" name ="missingPhotoID" hidden required)#default-btn2.input2
+                                p(onclick ="defaultBtnActive2()")#custom-btn2 Choose a File
+
+
+                    p.head Declaration 
+                    hr
+
+                    div.undertaking
+                        p I hereby declare that the details furnished above are true and correct to the best of my knowledge and belief and I undertake the responsibility to inform about any changes therein, immediately.
+                        div.checkbox
+                            input(type="checkbox", name="status" value = 0 required)
+                            label(for="status") I agree to the above Terms & Conditions
+
+                    div.button
+                        input(type="submit" value="Submit")#btn.submit
+
+                    div.modal#modal
+                        div.modal-body
+                            img(src="../public/img/loader.gif", alt="", srcset="")
+                            p Reporting Missing Person ! Please Wait ...
+
+                    div.modal2
+                        p Profile Photo and Aadhar Card Image is necessary...
+
+                    div#overlay
+        
+
+
+        script(src="../public/scripts/missingPerson.js") 
