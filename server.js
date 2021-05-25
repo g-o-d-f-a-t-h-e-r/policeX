@@ -802,7 +802,7 @@ app.get('/editFIR', redirectLogin, (req, res) => {
 
 })
 
-app.post('/editFIR', upload.fields([{ name : 'allegedPhoto', maxCount : 1 }]), (req, res) => {
+app.post('/editFIR', upload.fields([{ name : 'allegedPhoto', maxCount : 1 }]), async (req, res) => {
     const firNo = req.param('firNo')
     const oldAllegedPhoto = req.param('oldAllegedPhoto')
     console.log(firNo);
@@ -842,13 +842,13 @@ app.post('/editFIR', upload.fields([{ name : 'allegedPhoto', maxCount : 1 }]), (
         status : status,
     }}
 
-    userFIR.updateOne(query, newValues, (err, response) => {
+    await userFIR.updateOne(query, newValues, (err, response) => {
         
         if(err){
             console.log('Error updating the values : ', err)
         }
         console.log('FIR Updated...')
-
+        console.log(response)
         
         
         gfs.remove({filename : oldAllegedPhoto, root : 'userProfileImgs'}, function (err) {
@@ -860,7 +860,7 @@ app.post('/editFIR', upload.fields([{ name : 'allegedPhoto', maxCount : 1 }]), (
 
     })
 
-    userFIR.findOne({
+    await userFIR.findOne({
         firNo : firNo
     })
     .then((user) => {
