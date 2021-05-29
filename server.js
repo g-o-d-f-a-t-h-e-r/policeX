@@ -16,7 +16,9 @@ const moment = require('moment');
 const { ReadStream } = require('fs');
 const userFIR = require('./model/userFirs');
 const infoAboutMishap = require('./model/inform');
-const missingPerson = require('./model/missingPerson')
+const missingPerson = require('./model/missingPerson');
+const nodemailer = require('nodemailer')
+random = {}
 
 
 
@@ -207,6 +209,118 @@ app.post('/api/login', (req, res)=> {
 // -------------------------------------------------------------------------------------------------------------
 
 
+// FORGOT PASSWORD ---------------------------------------------------------------------------------------------
+
+app.get('/forgotPassword', (req, res) => {
+    res.status(200).render('forgotPassword.pug')
+})
+
+app.post('/forgotPassword', async(req, res) => {
+    const { emailAdd } = req.body
+
+    await User.findOne({
+        emailAdd : emailAdd
+    })
+    .then(async(user) => {
+        if(user){
+            random[emailAdd] = Math.floor(100000 + Math.random() * 900000)
+            console.log(random)
+            let transporter = nodemailer.createTransport({
+                service : 'gmail',
+                auth : {
+                    user : `policex112@gmail.com`,
+                    pass : `policex@1234`
+                }
+            })
+
+            let mailOptions = {
+                from : `policex112@gmail.com`,
+                to : emailAdd,
+                subject : `Police X Forgot Password`,
+                text : `The OTP for resetting your password is : ${random[emailAdd]}`
+            }
+
+            transporter.sendMail(mailOptions, (err, info) => {
+                if(err){
+                    console.log('Error sending Email to the reciever ! ', err)
+                    res.redirect('/login')
+                }else{
+                    console.log('Email Sent : ' + info.response)
+                    res.status(200).render('resetPassword.pug', {
+                        emailAdd : emailAdd
+                    })
+                    // res.redirect('/resetPassword')
+
+                }
+            })
+        }else{
+            delete random[emailAdd]
+            res.status(200).render('forgotPassword.pug', {
+                msg : `No account is registerd with the given email ID !`
+            })
+        }
+        
+    })
+    .catch((err) => {
+        delete random[emailAdd]
+        console.log('Error Finding the person : ', err)
+    })
+    
+
+})
+
+app.post('/resetPassword', async(req, res) => {
+    
+    const {emailAdd, OTP, pass, cpass } = req.body
+    console.log('this is inside reset password', random[emailAdd])
+    if(pass == cpass){
+
+        if(emailAdd in random){
+
+            if(random[emailAdd] == OTP){
+
+                const bkey = await bcrypt.hash(pass, 10);
+                const query = {emailAdd : emailAdd}
+                const obj = {$set : {
+                    key : bkey
+                }}
+                await User.updateOne(query, obj, (err, response) => {
+                    if(err){
+                        console.log('Error updating the password : ', err)
+                    }else{
+                        console.log('Password reset successfull')
+                        delete random[emailAdd]
+                        res.status(200).render('forgotPassword.pug', {
+                            success : `Password reset successfull !`
+                        })
+                    }
+                })
+                
+            }else{  
+                delete random[emailAdd]
+                res.status(200).render('forgotPassword.pug', {
+                    msg : `OTP did not match !`
+                })
+            }
+
+        }else{
+            delete random[emailAdd]
+            res.status(200).render('forgotPassword.pug', {
+                msg : `OTP expired please try again !`
+            })
+        }
+
+    }else{
+        res.status(200).render('forgotPassword.pug', {
+            msg : `Password and Confirm Password did not match ! `
+        })
+    }
+    
+})
+
+
+
+// -------------------------------------------------------------------------------------------------------------
 
 
 
