@@ -237,7 +237,9 @@ app.post('/forgotPassword', async(req, res) => {
                 from : `policex112@gmail.com`,
                 to : emailAdd,
                 subject : `Police X Forgot Password`,
-                text : `The OTP for resetting your password is : ${random[emailAdd]}`
+                html : `<h3>Hello ${emailAdd}</h3>
+                        <p> Your OTP for resetting the Password is : ${random[emailAdd]}`
+
             }
 
             transporter.sendMail(mailOptions, (err, info) => {
