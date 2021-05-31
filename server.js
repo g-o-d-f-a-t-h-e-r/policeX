@@ -238,7 +238,7 @@ app.post('/forgotPassword', async(req, res) => {
                 to : emailAdd,
                 subject : `Police X Forgot Password`,
                 html : `<h3>Hello ${emailAdd}</h3>
-                        <p> Your OTP for resetting the Password is : <h3>${random[emailAdd]}</h3>`
+                        <p> Your OTP for resetting the Password is : <h3 style='display : inline;'>${random[emailAdd]}</h3>`
 
             }
 
