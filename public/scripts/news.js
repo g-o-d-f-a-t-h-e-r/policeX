@@ -3,7 +3,7 @@ let news1 = document.querySelector('.news1');
 let news2 = document.querySelector('.news2');
 
 
-fetch('http://api.mediastack.com/v1/news?access_key=9ae0ecffcb224c929bbc12007ebec58a&%20countries=in&%20keywords=crime&languages=en&limit=100', {
+fetch('http://api.mediastack.com/v1/news?access_key=04688a10ee5bde3f8341027933219ae7&%20countries=in&%20keywords=crime&languages=en&limit=1000', {
     
 })
     .then(res => {
