@@ -1,0 +1,211 @@
+*{
+    margin : 0;
+    padding : 0;
+}
+
+
+html{
+    background-color: rgb(233, 233, 233);
+    scroll-behavior: smooth;
+}
+
+/* width */
+::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+    border-radius: 10px;
+    box-shadow: inset 0 0 2px rgb(224, 224, 224);
+  }
+   
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #40D3DC; 
+    border-radius: 10px;
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #36c1c9; 
+    
+  }
+
+#navbar{
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    user-select: none;
+    font-family: 'Eczar', serif;
+    background: rgb(95, 95, 95);
+    position : sticky;
+    top: 0;
+    z-index: 2;
+
+}
+
+.logo{
+    user-select: none;
+    text-decoration: none;
+    color: white;
+}
+
+#logo{
+    display: flex;
+    align-items: center;
+    padding-left: 40px;
+    text-decoration: none;
+    
+}
+
+#navbar img{
+    width: 70px;
+    user-select: none;
+    text-decoration: none;
+}
+
+#navbar h1{
+    font-family: 'Chivo', sans-serif;
+    padding-left: 20px;
+    font-size: 2.5rem;
+    user-select: none;
+    text-decoration: none;
+}
+
+#navbar h1 span{
+    font-size: 3.5rem;
+    color: rgb(248, 209, 37);
+}
+
+#navbar ul{
+    display: flex;
+    align-items: center;
+}
+
+#navbar ul li{
+    padding: 0 30px;
+    list-style: none;
+    font-size: 1.6rem;
+}
+
+#navbar ul li a{
+    text-decoration: none;
+    color: white;
+    cursor: pointer;
+}
+
+#btn{
+    padding :10px 25px;
+    /* margin-top: 2px; */
+    border: none;
+    font-family: 'Chivo', sans-serif;
+    font-weight: bold;
+    text-shadow: 0 0 1px #000;
+    font-size: 1.2rem;
+    color: black;
+    outline: none;
+    border-radius: 100px;
+    background-color:rgb(110, 226, 255);
+    cursor: pointer;
+    transition-duration: 0.2s;
+    font-size: 1.1rem;
+
+}
+
+#btn:hover{
+    background-color:rgb(59, 213, 252);
+}
+
+.heading{
+    padding: 50px 50px 20px 50px;
+}
+
+
+.head{
+    font-size: 2.5rem;
+    font-family: 'Eczar', serif;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgb(17, 17, 102);
+    font-weight: bold;
+}
+
+.hr{
+    height: 5px;
+    background-color: rgb(17, 17, 102);
+    border: none;
+}
+
+.chart_sec_1{
+    display: flex;
+    padding: 40px;
+}
+
+.line, .bar{
+    padding: 20px;
+    font-family: 'Chivo', sans-serif;
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+
+#line, #bar{
+    width: 45vw;
+}
+
+.pie, .radar{
+    font-family: 'Chivo', sans-serif;
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+
+#pie, #radar{
+    width: 45vw;
+    padding : 20px;
+}
+
+
+
+
+#chart-container{
+    background-color: rgb(233, 233, 233);
+    text-align: center;
+    margin: 20px;
+}
+
+
+.chart_sec_2{
+    display: flex;
+    align-items: center;
+    margin: 40px;
+}
+
+
+.text{
+    padding: 20px;
+}
+
+
+.text .title{
+    font-family: 'Chivo', sans-serif;
+    font-weight: bold;
+    font-size: 1.4rem;
+    color:rgb(17, 17, 102);
+    user-select: none;
+}
+
+.text hr{
+    margin-bottom: 20px;
+}
+
+.text .content{
+    padding-right: 10px;
+    font-family: 'eczar', serif;
+    font-size: 1.1rem;
+    line-height: 22px;
+    margin: 10px 0;
+}
+

@@ -1,0 +1,72 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(http-equiv="X-UA-Compatible", content="IE=edge")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        link(rel="stylesheet", href="../public/css/report.css")
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Chivo:wght@300&family=Eczar&display=swap" rel="stylesheet"> 
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;700&display=swap" rel="stylesheet">
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;500&display=swap" rel="stylesheet">
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;500&display=swap" rel="stylesheet">
+        <link rel="shortcut icon" type="image/x-icon" href="../public/img/logo.png" />
+        script(src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.3.2/chart.min.js") 
+        <script src="https://cdn.fusioncharts.com/fusioncharts/latest/fusioncharts.js"></script>
+        <script src="https://cdn.fusioncharts.com/fusioncharts/latest/fusioncharts.maps.js"></script>
+        <script src="https://cdn.fusioncharts.com/fusioncharts/latest/maps/fusioncharts.world.js"></script>
+        <script src="https://cdn.fusioncharts.com/fusioncharts/latest/themes/fusioncharts.theme.fusion.js"></script>
+        title Report Analysis
+    body 
+        header#nav-area
+        div#navbar
+            a(href="http://policex.herokuapp.com").logo 
+                div#logo
+                    img(src="../public/img/logo.png", alt="", srcset="")
+                    h1 #[span P]olice - X
+            ul
+                li #[a(href="http://policex.herokuapp.com") Home]
+                li #[a(href="http://") About Us]
+                li #[a(href="#news") News]
+                li #[a(href="#services") Services]
+                li #[a(href="/login") Login]
+
+        div.heading
+            p.head Report Analysis
+            hr.hr
+
+        div#report
+            div.chart_sec_1
+                div.line
+                    canvas#line
+                    p(style='text-align : center; margin: 10px; color: #4d4d4d ') Line Plot of Rape cases vs Kidnapping cases in India
+                div.bar
+                    canvas#bar
+                    p(style='text-align : center; margin: 10px; color: #4d4d4d ') Bar plot of theft vs Robbery
+
+            div.chart_sec_1
+                div.radar
+                    canvas#radar
+                    p(style='text-align : center; margin: 10px; color: #4d4d4d ') Radar Graph of Crimes in Uttar Pradesh Vs. Maharashtra   
+
+                div.pie
+                    canvas#pie
+                    p(style='text-align : center; margin: 10px; color: #4d4d4d ') Doughnut chart of Number of Violent crimes by type in India
+
+
+        div.chart_sec_2
+            div#chart-container
+            div.text
+                p.title Uttar Pradesh with the Highest Crime rate : 
+                hr
+                p.content Overall, 30,62,579 cases were registered across the country in 2017, up from 29,75,711 in 2016 and 29,49,400 in 2015.
+                p.content UP, also the most populous state, registered 3,10,084 cases during the year and had the highest share of 25% in the country, it stated. The data showed an upward trend for straight third year in UP, which had recorded 2,82,171 cases in 2016 and 2,41,920 in 2015.
+                p.content Maharashtra, which accounted for 19.2 per cent of crime in the country, registered 2,88,879 FIRs in 2017, 2,61,714 in 2016 and 2,75,414 in 2015, according to the NCRB.
+                p.content Madhya Pradesh registered 2,69,512 FIRs in 2017 and accounted for 8.8 per cent overall cases. It had lodged 2,68,614 cases in 2015 and 2,64,418 in 2016, the data showed.
+
+
+
+        script(src="../public/scripts/report.js") 
